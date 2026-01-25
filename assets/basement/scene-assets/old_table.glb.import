@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b6nk306h2a8qt"
-path="res://.godot/imported/wall.glb-09e4a18617d28761fd825d6a0acf2f4d.scn"
+uid="uid://gmv55rxyux8w"
+path="res://.godot/imported/old_table.glb-a770fbad92c2af422fc59f22eaeb56af.scn"
 
 [deps]
 
-source_file="res://assets/basement/scene-assets/wall.glb"
-dest_files=["res://.godot/imported/wall.glb-09e4a18617d28761fd825d6a0acf2f4d.scn"]
+source_file="res://assets/basement/scene-assets/old_table.glb"
+dest_files=["res://.godot/imported/old_table.glb-a770fbad92c2af422fc59f22eaeb56af.scn"]
 
 [params]
 
@@ -17,7 +17,7 @@ nodes/root_type=""
 nodes/root_name=""
 nodes/root_script=null
 nodes/apply_root_scale=true
-nodes/root_scale=0.5
+nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
 nodes/use_name_suffixes=true
 nodes/use_node_type_suffixes=true

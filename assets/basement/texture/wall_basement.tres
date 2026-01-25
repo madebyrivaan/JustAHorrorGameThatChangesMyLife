@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://uembprhaw67q"]
+
+[ext_resource type="Shader" uid="uid://ci2r27n082aa5" path="res://assets/basement/texture/wall_basement.gdshader" id="1_qugjy"]
+[ext_resource type="Texture2D" uid="uid://c2354c2ewthdt" path="res://assets/basement/texture_image/textures-wall/concrete_floor_painted_diff_2k.jpg" id="2_m21rl"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7r2ad"]
+noise_type = 3
+frequency = 0.1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nrxfr"]
+noise = SubResource("FastNoiseLite_7r2ad")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_irvl6"]
+load_path = "res://.godot/imported/concrete_floor_painted_rough_2k.jpg-f0a5b840fd6c215495f00524c716a76f.s3tc.ctex"
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_qugjy")
+shader_parameter/albedo_tex = ExtResource("2_m21rl")
+shader_parameter/roughness_tex = SubResource("CompressedTexture2D_irvl6")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_nrxfr")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/grime_strength = 0.4
+shader_parameter/roughness_boost = 0.5
+shader_parameter/normal_strength = 0.7

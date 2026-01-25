@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b6nk306h2a8qt"
-path="res://.godot/imported/wall.glb-09e4a18617d28761fd825d6a0acf2f4d.scn"
+uid="uid://c2fqj5irhuy4r"
+path="res://.godot/imported/wooden_back_bar_cabinet_-_4096px2.glb-cfa8351499bc1ac0959ee12d91d728f8.scn"
 
 [deps]
 
-source_file="res://assets/basement/scene-assets/wall.glb"
-dest_files=["res://.godot/imported/wall.glb-09e4a18617d28761fd825d6a0acf2f4d.scn"]
+source_file="res://assets/basement/scene-assets/wooden_back_bar_cabinet_-_4096px2.glb"
+dest_files=["res://.godot/imported/wooden_back_bar_cabinet_-_4096px2.glb-cfa8351499bc1ac0959ee12d91d728f8.scn"]
 
 [params]
 
@@ -17,7 +17,7 @@ nodes/root_type=""
 nodes/root_name=""
 nodes/root_script=null
 nodes/apply_root_scale=true
-nodes/root_scale=0.5
+nodes/root_scale=0.7
 nodes/import_as_skeleton_bones=false
 nodes/use_name_suffixes=true
 nodes/use_node_type_suffixes=true
@@ -28,7 +28,7 @@ meshes/light_baking=1
 meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
 skins/use_named_skins=true
-animation/import=true
+animation/import=false
 animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true

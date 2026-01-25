@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dufrtv6sg4fqo"]
+
+[ext_resource type="PackedScene" uid="uid://ctvwb86ao5a8r" path="res://assets/basement/scene-assets/pillar_.glb" id="1_c8wxd"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="pillar_" parent="." instance=ExtResource("1_c8wxd")]
+transform = Transform3D(0.49179375, 0, 0, 0, 1, 0, 0, 0, 0.6015139, -0.5590638, 0, -0.46330166)
+
+[editable path="pillar_"]
