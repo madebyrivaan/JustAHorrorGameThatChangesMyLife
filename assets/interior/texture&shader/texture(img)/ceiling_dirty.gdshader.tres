@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://x3i7viga36a2"]
+
+[ext_resource type="Shader" uid="uid://bpbs4ev8pkyce" path="res://assets/interior/texture&shader/texture(img)/ceiling_dirty.gdshader.gdshader" id="1_qxfkv"]
+[ext_resource type="Texture2D" uid="uid://bdufwbnh70t6s" path="res://assets/interior/wall/wall_main_interior-wall-with-stained-areas.jpg" id="2_efwgy"]
+[ext_resource type="Texture2D" uid="uid://c15633ox81ndc" path="res://assets/interior/texture&shader/texture(img)/concrete_layers_02_rough_2k.exr" id="3_gff0s"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qxfkv"]
+noise_type = 3
+frequency = 0.6
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vcxjl"]
+noise = SubResource("FastNoiseLite_qxfkv")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_qxfkv")
+shader_parameter/albedo_tex = ExtResource("2_efwgy")
+shader_parameter/roughness_tex = ExtResource("3_gff0s")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_vcxjl")
+shader_parameter/roughness_boost = 0.05
+shader_parameter/center_darkening = 0.3
+shader_parameter/center_falloff = 0.55
+shader_parameter/grime_strength = 0.25

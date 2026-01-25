@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=3 uid="uid://bs72ogkvdd7d6"]
+
+[ext_resource type="Script" uid="uid://bjacmgknmjsm8" path="res://script/player.gd" id="1_ucva2"]
+[ext_resource type="Script" uid="uid://cpq0vs1dplx55" path="res://script/fps_label.gd" id="2_hjaqi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
+albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ucva2"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iof21"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="LabelSettings" id="LabelSettings_xo3ru"]
+font_size = 17
+
+[node name="ProtoController" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_ucva2")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+material_override = SubResource("StandardMaterial3D_iof21")
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_ucva2")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_iof21")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head" groups=["camera"]]
+fov = 56.8
+far = 1733.66
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.30051935, 0.039761186)
+target_position = Vector3(0, 0, -2)
+collision_mask = 2
+debug_shape_custom_color = Color(0.6418067, 0, 0.11439655, 1)
+debug_shape_thickness = 5
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="HUD"]
+anchors_preset = -1
+anchor_right = 0.035
+anchor_bottom = 0.035
+offset_right = -0.3199997
+offset_bottom = 0.3199997
+text = "FPS"
+label_settings = SubResource("LabelSettings_xo3ru")
+script = ExtResource("2_hjaqi")
+metadata/_edit_use_anchors_ = true
+
+[node name="interact-text" type="RichTextLabel" parent="HUD"]
+anchors_preset = -1
+anchor_left = 0.437
+anchor_top = 0.41400003
+anchor_right = 0.707
+anchor_bottom = 0.5
+offset_left = -0.42401123
+offset_top = -1.2720337
+offset_right = -0.46398926
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="ui-cross" type="CanvasLayer" parent="HUD"]
+
+[node name="TextureRect" type="TextureRect" parent="HUD/ui-cross"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="HUD/ui-cross/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.8117647, 0.8117647, 0.8117647, 1)

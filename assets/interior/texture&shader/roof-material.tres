@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://wyukg2obf1tg"]
+
+[ext_resource type="Texture2D" uid="uid://cy03lcu522kbn" path="res://assets/interior/texture&shader/texture(img)/wall_w2_interior-wall-with-stained-areas.jpg" id="1_rx3s6"]
+[ext_resource type="Texture2D" uid="uid://c15633ox81ndc" path="res://assets/interior/texture&shader/texture(img)/concrete_layers_02_rough_2k.exr" id="2_ahokd"]
+
+[resource]
+albedo_color = Color(0.47843137, 0.47843137, 0.45882353, 1)
+albedo_texture = ExtResource("1_rx3s6")
+metallic_specular = 0.22
+roughness_texture = ExtResource("2_ahokd")
+ao_enabled = true
+ao_light_affect = 0.4

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cfb2nh6wa4hef"]
+
+[ext_resource type="Texture2D" uid="uid://bhvu70bifypnb" path="res://assets/interior/texture&shader/texture(img)/concrete_wall_001_diff_2k.jpg" id="1_l8wly"]
+[ext_resource type="Texture2D" uid="uid://rlil8kdytq6j" path="res://assets/interior/texture&shader/texture(img)/concrete_wall_001_rough_2k.jpg" id="2_wdpov"]
+
+[resource]
+albedo_texture = ExtResource("1_l8wly")
+metallic_specular = 0.05
+roughness_texture = ExtResource("2_wdpov")

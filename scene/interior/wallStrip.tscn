@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=4 uid="uid://2vm7a4a73pyj"]
+
+[ext_resource type="Texture2D" uid="uid://bdufwbnh70t6s" path="res://assets/interior/wall/wall_main_interior-wall-with-stained-areas.jpg" id="1_he4hq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xjkq"]
+resource_name = "Material.003"
+cull_mode = 2
+albedo_texture = ExtResource("1_he4hq")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_w3c0a"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 4.7555246, 2, 2),
+"format": 34896613377,
+"index_count": 108,
+"index_data": PackedByteArray("AAABAAIADgACAAEAAAAGAAEABgAOAAEACAAAAAIABgAAAAgADgAJAAIACAACAAkABgAPAA4ABgAIAA8ADwAQAA4ADgAMAAkADgAQAAwACQALAAgACQAMAAsACAARAA8ADwARABAACAALABEAEAANAAwADAASAAsADAANABIACwAKABEACwASAAoAEQATABAAEAATAA0AEQAKABMADQAFABIACgAEABMAEwADAA0ADQADAAUAEwAEAAMAEgAFAAcAEgAHAAoABwAFAAMACgAHAAQABwADAAQA"),
+"lods": [4.2414545e-08, PackedByteArray("AAABAAIACAAAAAIAAAAGAAEABgAAAAgACAACAAkAAQAJAAIACAAKAAYABgAKAAEACQALAAgACAALAAoACQAMAAsAAQAMAAkADAANAAsAAQANAAwADQAFAAsACgAEAAEAAQADAA0ADQADAAUAAQAEAAMACwAFAAcACwAHAAoABwAFAAMACgAHAAQABwADAAQA"), 0.0005404361, PackedByteArray("AAABAAIAAQADAAIAAgADAAAAAQAEAAMAAwAFAAAAAAAGAAEABwADAAQABwAFAAMABwAEAAEAAAAFAAcABgAHAAEAAAAHAAYA")],
+"name": "Material.003",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAA////////AAD/////AAAAAP//AAD//wAAAAAAAAAAAAD//wAAAAAAAKlrAAD//wAAqWv/////AADLjAAAAAAAAJt8AAD//wAAm3z/////AADLjP////8AAKlr//8AAAAAqWsAAAAAAACbfP//AAAAAJt8AAAAAAAAy4wAAP//AADLjP//AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_tlkwg"]
+resource_name = "wall_main_Cube_004"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 4.7555246, 2, 2),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/+fAAD/n/8//18AAP9f/z//X/+//1//f/+f/7//n/9//x//P/9f/3//H/9//1//P//f/3//n/9//5//P//f/z//X/9//5//P/+f/3//X/8//5//P/+f/z//n/8//1//P/+f/z//X/8//5//P/+f/z//X/8//1//f/9f/z//X/9//5//f/9f/3//n/9//1//f/+f/3//n/9//5//f/+f/3//X/8//1//f/9f/3//X/8/"),
+"format": 34896613399,
+"index_count": 108,
+"index_data": PackedByteArray("AAABAAIAAAADAAEACAAkAAoACAAlACQAJQAmACQAJQAnACYAJwAoACYAJwAjACgAIwALACgAIwAJAAsAKQAYABkAKQAZABMAKQATABAAKQAqABgAKgAaABgAKgArABoAKwASABoAKwARABIAGwAEABwAGwAGAAQAHAAdABsAHAAeAB0AHgAsAB0AHgAfACwAHwAHACwAHwAFAAcADgAgAC0ADgAMACAAIAAuAC0AIAAiAC4AIgAhAC4AIgAvACEALwANACEALwAPAA0AFAAVABYAFAAXABUA"),
+"lods": [4.2414545e-08, PackedByteArray("AAABAAIAAAADAAEAEAAYABkAEAAZABMAEAAaABgAEAASABoAEAARABIAGwAEABwAGwAGAAQAHAAdABsAHAAeAB0AHgAfAB0AHwAHAB0AHwAFAAcADgAMACAAIAAhAA4AIAAiACEAIgANACEAIgAPAA0ACAAjAAoAIwALAAoAIwAJAAsAFAAVABYAFAAXABUA"), 0.0005404361, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABQAHAAYACAAJAAoACQALAAoADAANAA4ADAAPAA0AEAARABIAEAASABMAFAAVABYAFAAXABUA")],
+"material": SubResource("StandardMaterial3D_2xjkq"),
+"name": "Material.003",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAP//////v/////////5/AAAAAP///7///wAA///+fwAAAAAAAP////8AAAAA//8AAP//AAD///////8AAP//AAAAAP///7///wAAAAD/vwAAAAAAAP+///8AAP///78AAP//AAD///////8AAP+//////////78AAP//////////AAAAAFTV////////VNX/////AABU1f//AAD//1TVm3z//////7+pa////////8uM//////+/qWsAAP///7+pa///////v5t8AAD///5/m3z//////n/LjP/////+f6lrAAD///+/y4wAAAAA/7+bfAAA////v8uMAAAAAP//qWv//wAA//+pawAAAAD//5t8//8AAP//m3wAAAAA///LjP//AAD//6lr//8AAP//m3z//wAA/7/LjP//AAD/v8uMAAD///5/qWsAAAAA/7+bfAAAAAD/v8uMAAD///+/VNVU1VTVVNVU1VTVVNVU1f//////f/////////9/////v/+/////f/+//7////9/AAD/fwAA/38AAP9/AAD/f/9//7////9/////f/9//7+qKqoqqiqqKqoqqiqqKqoq////f/9//7////9/////////////f////3////9///8AAP9/AAD/fwAA/3////9//7//v/+//7////9/////f////3//f/+/////f////3//f///AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_w3c0a")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Cube_002" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.035, 0, 0, 0, 0.1, 0, 0, 0, 5, -0.3594731, 0.07983494, 0.16403705)
+mesh = SubResource("ArrayMesh_tlkwg")
+skeleton = NodePath("")

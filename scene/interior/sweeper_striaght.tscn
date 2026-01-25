@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk0vrlc0ykihw"]
+
+[ext_resource type="PackedScene" uid="uid://dnl06klpfawa1" path="res://assets/interior/decor/sweeper_straight.glb" id="1_2jdpb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2jdpb"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="sweeper_straight" parent="." instance=ExtResource("1_2jdpb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5353731, 0, 1.3098829)
+
+[node name="Crown Molding_Trim_0" parent="sweeper_straight" index="0"]
+transform = Transform3D(-5.9760118, -0.18258357, -6.529699e-08, 0, -2.1381863e-06, 5.9788013, -0.18258356, 5.976012, 2.137189e-06, -3.486075, 0.7259302, -1.9631474)
+material_override = SubResource("StandardMaterial3D_2jdpb")
+lod_bias = 0.2
+
+[editable path="sweeper_straight"]

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://tunno7l1mcfs"]
+
+[resource]
+albedo_color = Color(0.3529412, 0.41568628, 0.36862746, 1)
+metallic_specular = 0.15
+roughness = 0.6
+heightmap_scale = 16.0
+grow_amount = 3.8
+stencil_flags = 2
