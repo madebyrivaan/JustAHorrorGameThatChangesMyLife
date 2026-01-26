@@ -11,7 +11,6 @@ frequency = 0.1
 noise = SubResource("FastNoiseLite_7r2ad")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_irvl6"]
-load_path = "res://.godot/imported/concrete_floor_painted_rough_2k.jpg-f0a5b840fd6c215495f00524c716a76f.s3tc.ctex"
 
 [resource]
 render_priority = 0
