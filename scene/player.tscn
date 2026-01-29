@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bs72ogkvdd7d6"]
+[gd_scene load_steps=7 format=3 uid="uid://bs72ogkvdd7d6"]
 
 [ext_resource type="Script" uid="uid://bjacmgknmjsm8" path="res://script/player.gd" id="1_ucva2"]
-[ext_resource type="PackedScene" uid="uid://cbnr5rxx5jq4o" path="res://character/arm.tscn" id="2_fvtld"]
 [ext_resource type="Script" uid="uid://cpq0vs1dplx55" path="res://script/fps_label.gd" id="2_hjaqi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
@@ -14,68 +13,6 @@ height = 1.8
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iof21"]
 radius = 0.4
 height = 1.8
-
-[sub_resource type="Animation" id="Animation_fvtld"]
-resource_name = "idle"
-length = 5.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.7666667, 3.3666666, 4.9666667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, -3.1017642, 0), Vector3(0.040142573, -3.10145, 0), Vector3(0.017453292, -3.10145, 0), Vector3(0, -3.10145, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.7666667, 3.3666666, 5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.015031666, -0.14913619, -0.14470434), Vector3(-0.015031666, -0.14913619, -0.14470434), Vector3(-0.015031666, -0.14913619, -0.14470434), Vector3(-0.015031666, -0.14913619, -0.14470434)]
-}
-
-[sub_resource type="Animation" id="Animation_ct4mp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -3.1017642, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.015031666, -0.14913619, -0.14470434)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_s4jxa"]
-_data = {
-&"RESET": SubResource("Animation_ct4mp"),
-&"idle": SubResource("Animation_fvtld")
-}
 
 [sub_resource type="LabelSettings" id="LabelSettings_xo3ru"]
 font_size = 17
@@ -94,12 +31,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_iof21")
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.752837, -0.2016567)
 
 [node name="Camera3D" type="Camera3D" parent="Head" groups=["camera"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06923199, 0.095374584)
 fov = 56.8
-far = 1733.66
+far = 30.45
 
 [node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.30051935, 0.039761186)
@@ -107,18 +44,6 @@ target_position = Vector3(0, 0, -2)
 collision_mask = 2
 debug_shape_custom_color = Color(0.6418067, 0, 0.11439655, 1)
 debug_shape_thickness = 5
-
-[node name="Node3D" parent="Head/Camera3D" instance=ExtResource("2_fvtld")]
-transform = Transform3D(-0.9992069, 0, -0.039817918, 0, 1, 0, 0.039817918, 0, -0.9992069, -0.015031666, -0.14913619, -0.14470434)
-
-[node name="arm" parent="Head/Camera3D/Node3D/arms2/root/Skeleton3D" index="0"]
-transform = Transform3D(1, -7.450581e-09, 1.1641532e-09, 3.7252903e-09, 1, -7.450581e-09, 2.3283064e-10, 0, 0.99999994, -8.066627e-05, 3.201887e-06, -2.8684735e-07)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Camera3D/Node3D"]
-libraries = {
-&"": SubResource("AnimationLibrary_s4jxa")
-}
-autoplay = "idle"
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -176,5 +101,3 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.8117647, 0.8117647, 0.8117647, 1)
-
-[editable path="Head/Camera3D/Node3D"]

@@ -1,86 +1,70 @@
 extends Node3D
 
+@onready var hinge: Node3D = $Hinge
 
-@onready var auto_close_timer: Timer = $auto_close_timer
-@onready var anim: AnimationPlayer = $AnimationPlayer
-@onready var door_mesh: MeshInstance3D = $house_door
-@onready var sfx_open: AudioStreamPlayer3D = $SFX_Open
-@onready var sfx_close: AudioStreamPlayer3D = $SFX_Close
 
-var door_busy := false
-var is_open := false
-var last_open_dir := 1   # 1 = forward (+X animation), -1 = backward (-X animation)
-const AUTO_CLOSE_TIME := 4.5   # seconds (change for horror pacing)
+@onready var creak := $SFX_Open
 
-const SIDE_THRESHOLD := 0.18
-const DOT_FALLBACK_THRESHOLD := 0.15
+@export var auto_close_force := 7.0
+var dragging := false
+var door_angle := 0.0
+var prev_mouse := Vector2.ZERO
+@export var slow_close_force := 5.0
+@export var fast_close_force := 20.0
+@export var fast_close_delay := 3.5
 
-func _ready():
-	var player = get_tree().get_first_node_in_group("player")
-	if player:
-		auto_close_timer.one_shot = true
-		auto_close_timer.timeout.connect(_on_auto_close_timeout)
-	if is_open:
-		_close_door()
+var release_time := 0.0
+
+@export var open_limit := 95.0
+@export var close_limit := 0.0
+@export var drag_speed := 0.08
+
+# Premium feel
+@export var edge_resistance := 0.4
+@export var stop_snap := 2.0
+@export var micro_shake := 0.15
+
+func interact(player_pos):
+	if dragging:
 		return
-		
-func _play_sfx(player: AudioStreamPlayer3D):
-	player.pitch_scale = randf_range(0.92, 1.05)
-	player.volume_db = randf_range(-0.4, 6)
-	player.play()
+	dragging = true
+	prev_mouse = get_viewport().get_mouse_position()
 
+func _process(delta):
 
-func interact(player_pos: Vector3) -> void:
-	print("self",self)
-	print("DOOR SIGNAL RECEIVED")
+	# DRAGGING
+	if dragging and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 
-	# toggle close if already open
-	if door_busy:
-		print("DOOR BUSY – interaction ignored")
-		return
+		var motion := Input.get_last_mouse_velocity().x
 
-	# 🔥 EXPLICIT DIRECTION USING MARKER
-	var forward_dir = ( $Forward.global_position - global_position ).normalized()
-	var to_player = ( player_pos - global_position ).normalized()
+		var edge: float = inverse_lerp(close_limit, open_limit, door_angle)
+		var resistance: float = lerp(1.0, edge_resistance, abs(edge - 0.5) * 2.0)
 
-	var dot = forward_dir.dot(to_player)
-	print("DOT:", dot)
+		door_angle += -motion * drag_speed * delta * resistance
+		door_angle = clamp(door_angle, close_limit, open_limit)
 
-	if dot > 0:
-		# player is in FRONT of door
-		anim.play("open_backward")
-		last_open_dir = -1
-		print("OPEN: backward (player in front)")
-	else:
-		# player is BEHIND door
-		anim.play("open_forward")
-		last_open_dir = 1
-		print("OPEN: forward (player behind)")
-	_play_sfx(sfx_open)
-# 🔥 CUT OPEN SOUND AFTER ANIMATION
-	await get_tree().create_timer(1.3).timeout
-	sfx_open.stop()
-	
-	is_open = true
-	door_busy = true   # 🔒 lock interaction
-	auto_close_timer.start(AUTO_CLOSE_TIME)
-	print("AUTO CLOSE TIMER STARTED")
+		var shake: float = sin(float(Time.get_ticks_msec()) * 0.02) * micro_shake
+		hinge.rotation_degrees.z = -(door_angle + shake)
 
-func _close_door():
-	if is_open:
-		if last_open_dir == 1:
-			anim.play("close_forward")
-		else:
-			anim.play("close_backward")
-		_play_sfx(sfx_close)
-	
-	is_open = false
-	await get_tree().create_timer(1.1).timeout
-	door_busy = false   # 🔓 unlock interaction
-	auto_close_timer.stop()
+		if not creak.playing:
+			creak.play()
 
-	print("DOOR CLOSED & UNLOCKED")
-	
-func _on_auto_close_timeout():
-	print("AUTO CLOSE TRIGGERED")
-	_close_door()
+	# RELEASE
+	elif dragging:
+		door_angle = snapped(door_angle, stop_snap)
+		dragging = false
+		release_time = Time.get_ticks_msec() / 1000.0
+		creak.stop()
+
+	# AUTO CLOSE (always runs)
+	if not dragging and door_angle > close_limit:
+
+		var now := Time.get_ticks_msec() / 1000.0
+		var elapsed := now - release_time
+
+		var force := slow_close_force
+		if elapsed > fast_close_delay:
+			force = fast_close_force
+
+		door_angle = move_toward(door_angle, close_limit, force * delta)
+		hinge.rotation_degrees.z = -door_angle

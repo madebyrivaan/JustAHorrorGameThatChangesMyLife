@@ -4,6 +4,7 @@
 # Happy prototyping!
 
 extends CharacterBody3D
+var ignore_next_mouse := false
 
 @export var can_move : bool = true
 ## Are we affected by gravity?
@@ -59,24 +60,63 @@ func _ready() -> void:
 	check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
+	# capture once on start (optional). If you prefer menu first, remove this.
+	capture_mouse()
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Mouse capturing
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		capture_mouse()
-	if Input.is_key_pressed(KEY_ESCAPE):
-		release_mouse()
-	
-	# Look around
-	if mouse_captured and event is InputEventMouseMotion:
-		rotate_look(event.relative)
-	
-	# Toggle freefly mode
-	if can_freefly and Input.is_action_just_pressed(input_freefly):
-		if not freeflying:
-			enable_freefly()
+
+	# Mouse button (press / release)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			capture_mouse()
+			try_interact()
 		else:
-			disable_freefly()
+			can_move = true
+		return
+
+	# Mouse motion (look)
+	if event is InputEventMouseMotion:
+		if mouse_captured:
+			if ignore_next_mouse:
+				ignore_next_mouse = false
+				return
+			rotate_look(event.relative)
+		return
+
+	# Escape key
+	if event is InputEventKey and event.keycode == KEY_ESCAPE and event.pressed:
+		release_mouse()
+
+
+func capture_mouse():
+	if mouse_captured:
+		return
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	mouse_captured = true
+	ignore_next_mouse = true
+
+
+func release_mouse():
+	if not mouse_captured:
+		return
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	mouse_captured = false
+
+func try_interact():
+	if not ray.is_colliding():
+		return
+
+	var hit = ray.get_collider()
+	if not is_instance_valid(hit):
+		return
+
+	var node := hit as Node
+	while node != null:
+		if node.has_method("interact"):
+			node.interact(global_position)
+			can_move = false
+			return
+		node = node.get_parent()
 
 func _physics_process(delta: float) -> void:
 	# If freeflying, handle freefly and nothing else
@@ -119,8 +159,6 @@ func _physics_process(delta: float) -> void:
 	
 	# Use velocity to actually move
 	move_and_slide()
-	check_Main_door()
-
 
 ## Rotate us to look around.
 ## Base of controller rotates around y (left/right). Head rotates around x (up/down).
@@ -143,16 +181,6 @@ func enable_freefly():
 func disable_freefly():
 	collider.disabled = false
 	freeflying = false
-
-
-func capture_mouse():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	mouse_captured = true
-
-
-func release_mouse():
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	mouse_captured = false
 
 
 ## Checks if some Input Actions haven't been created.
@@ -184,27 +212,3 @@ func enter_interior():
 	var main = get_tree().get_root().get_node("main")
 	if main:
 		main.load_interior()
-
-
-func check_Main_door():
-	interact_text.text = ""
-
-	if not ray.is_colliding():
-		return
-
-	var hit = ray.get_collider()
-	if not is_instance_valid(hit):
-		return
-
-	# 🔥 climb hierarchy until an interactable is found
-	var node := hit as Node
-	while node != null:
-		if node.has_method("interact"):
-			interact_text.text = "Press E To Interact"
-
-			if Input.is_action_just_pressed("interact"):
-				print("PLAYER INTERACT ->", node)
-				node.interact(global_position)
-			return
-
-		node = node.get_parent()
