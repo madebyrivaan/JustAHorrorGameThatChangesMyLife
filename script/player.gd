@@ -1,214 +1,103 @@
-# ProtoController v1.0 by Brackeys
-# CC0 License
-# Intended for rapid prototyping of first-person games.
-# Happy prototyping!
-
 extends CharacterBody3D
-var ignore_next_mouse := false
 
-@export var can_move : bool = true
-## Are we affected by gravity?
-@export var has_gravity : bool = true
-## Can we press to jump?
-@export var can_jump : bool = true
-## Can we hold to run?
-@export var can_sprint : bool = false
-## Can we press to enter freefly mode (noclip)?
-@export var can_freefly : bool = false
+# --- CONFIGURATION ---
+@export_group("Movement")
+@export var speed_walk : float = 2.5
+@export var speed_run : float = 4.5
+@export var jump_force : float = 4.0
+@export var gravity : float = 9.8
 
-@export_group("Speeds")
-## Look around rotation speed.
-@export var look_speed : float = 0.002
-## Normal speed.
-@export var base_speed : float = 2.0
-## Speed of jump.
-@export var jump_velocity : float = 2.5
-## How fast do we run?
-@export var sprint_speed : float = 4.0
-## How fast do we freefly?
-@export var freefly_speed : float = 25.0
+@export_group("Camera")
+@export var mouse_sensitivity : float = 0.002
+@export var mouse_interact_sensitivity : float = 0.0005 # Slower when opening doors
 
-@export_group("Input Actions")
-## Name of Input Action to move Left.
-@export var input_left : String = "ui_left"
-## Name of Input Action to move Right.
-@export var input_right : String = "ui_right"
-## Name of Input Action to move Forward.
-@export var input_forward : String = "ui_up"
-## Name of Input Action to move Backward.
-@export var input_back : String = "ui_down"
-## Name of Input Action to Jump.
-@export var input_jump : String = "ui_accept"
-## Name of Input Action to Sprint.
-@export var input_sprint : String = "sprint"
-## Name of Input Action to toggle freefly mode.
-@export var input_freefly : String = "freefly"
+@export_group("Interaction")
+@export var interaction_range : float = 2.5
 
-var mouse_captured : bool = false
-var look_rotation : Vector2
-var move_speed : float = 0.0
-var freeflying : bool = false
-
-## IMPORTANT REFERENCES
+# --- NODES ---
 @onready var head: Node3D = $Head
-@onready var collider: CollisionShape3D = $Collider
+@onready var camera: Camera3D = $Head/Camera3D
 @onready var ray: RayCast3D = $Head/Camera3D/RayCast3D
-@onready var interact_text: RichTextLabel = $"HUD/interact-text"
 
+# --- STATE ---
+var mouse_captured : bool = false
+# The object we are currently dragging
+var current_interactable : Node = null 
 
 func _ready() -> void:
-	check_input_mappings()
-	look_rotation.y = rotation.y
-	look_rotation.x = head.rotation.x
-	# capture once on start (optional). If you prefer menu first, remove this.
-	capture_mouse()
-
-func _unhandled_input(event: InputEvent) -> void:
-
-	# Mouse button (press / release)
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			capture_mouse()
-			try_interact()
-		else:
-			can_move = true
-		return
-
-	# Mouse motion (look)
-	if event is InputEventMouseMotion:
-		if mouse_captured:
-			if ignore_next_mouse:
-				ignore_next_mouse = false
-				return
-			rotate_look(event.relative)
-		return
-
-	# Escape key
-	if event is InputEventKey and event.keycode == KEY_ESCAPE and event.pressed:
-		release_mouse()
-
-
-func capture_mouse():
-	if mouse_captured:
-		return
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	mouse_captured = true
-	ignore_next_mouse = true
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		# Capture mouse if we clicked back into window
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			if !mouse_captured:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+				mouse_captured = true
+				return
+			
+			# Start Interaction
+			try_begin_interaction()
+		
+		# Release Interaction
+		if event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
+			end_interaction()
 
-func release_mouse():
-	if not mouse_captured:
-		return
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	mouse_captured = false
-
-func try_interact():
-	if not ray.is_colliding():
-		return
-
-	var hit = ray.get_collider()
-	if not is_instance_valid(hit):
-		return
-
-	var node := hit as Node
-	while node != null:
-		if node.has_method("interact"):
-			node.interact(global_position)
-			can_move = false
-			return
-		node = node.get_parent()
+	# MOUSE MOTION
+	if event is InputEventMouseMotion and mouse_captured:
+		if current_interactable:
+			# Pass the mouse movement TO THE DOOR instead of the camera
+			# We multiply by a lower sensitivity to give it "weight"
+			current_interactable.handle_drag(event.relative * mouse_interact_sensitivity)
+		else:
+			# Normal Camera Look
+			rotate_y(-event.relative.x * mouse_sensitivity)
+			head.rotate_x(-event.relative.y * mouse_sensitivity)
+			head.rotation.x = clamp(head.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
 func _physics_process(delta: float) -> void:
-	# If freeflying, handle freefly and nothing else
-	if can_freefly and freeflying:
-		var input_dir := Input.get_vector(input_left, input_right, input_forward, input_back)
-		var motion := (head.global_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-		motion *= freefly_speed * delta
-		move_and_collide(motion)
+	# If we are dragging a door, FREEZE movement completely
+	if current_interactable != null:
+		velocity = Vector3.ZERO
 		return
+
+	# Gravity
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+
+	# Jump
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = jump_force
+
+	# Movement
+	var input_dir := Input.get_vector("left", "right", "forward", "backward")
+	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	# Apply gravity to velocity
-	if has_gravity:
-		if not is_on_floor():
-			velocity += get_gravity() * delta
+	var speed = speed_run if Input.is_action_pressed("sprint") else speed_walk
 
-	# Apply jumping
-	if can_jump:
-		if Input.is_action_just_pressed(input_jump) and is_on_floor():
-			velocity.y = jump_velocity
-
-	# Modify speed based on sprinting
-	if can_sprint and Input.is_action_pressed(input_sprint):
-			move_speed = sprint_speed
+	if direction:
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
 	else:
-		move_speed = base_speed
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
 
-	# Apply desired movement to velocity
-	if can_move:
-		var input_dir := Input.get_vector(input_left, input_right, input_forward, input_back)
-		var move_dir := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-		if move_dir:
-			velocity.x = move_dir.x * move_speed
-			velocity.z = move_dir.z * move_speed
-		else:
-			velocity.x = move_toward(velocity.x, 0, move_speed)
-			velocity.z = move_toward(velocity.z, 0, move_speed)
-	else:
-		velocity.x = 0
-		velocity.y = 0
-	
-	# Use velocity to actually move
 	move_and_slide()
 
-## Rotate us to look around.
-## Base of controller rotates around y (left/right). Head rotates around x (up/down).
-## Modifies look_rotation based on rot_input, then resets basis and rotates by look_rotation.
-func rotate_look(rot_input : Vector2):
-	look_rotation.x -= rot_input.y * look_speed
-	look_rotation.x = clamp(look_rotation.x, deg_to_rad(-85), deg_to_rad(85))
-	look_rotation.y -= rot_input.x * look_speed
-	transform.basis = Basis()
-	rotate_y(look_rotation.y)
-	head.transform.basis = Basis()
-	head.rotate_x(look_rotation.x)
+func try_begin_interaction():
+	if ray.is_colliding():
+		var hit = ray.get_collider()
+		# Look for the physics body's parent or the node itself
+		var node = hit
+		while node:
+			if node.has_method("start_drag"):
+				current_interactable = node
+				current_interactable.start_drag(self)
+				return
+			node = node.get_parent()
 
-
-func enable_freefly():
-	collider.disabled = true
-	freeflying = true
-	velocity = Vector3.ZERO
-
-func disable_freefly():
-	collider.disabled = false
-	freeflying = false
-
-
-## Checks if some Input Actions haven't been created.
-## Disables functionality accordingly.
-func check_input_mappings():
-	if can_move and not InputMap.has_action(input_left):
-		push_error("Movement disabled. No InputAction found for input_left: " + input_left)
-		can_move = false
-	if can_move and not InputMap.has_action(input_right):
-		push_error("Movement disabled. No InputAction found for input_right: " + input_right)
-		can_move = false
-	if can_move and not InputMap.has_action(input_forward):
-		push_error("Movement disabled. No InputAction found for input_forward: " + input_forward)
-		can_move = false
-	if can_move and not InputMap.has_action(input_back):
-		push_error("Movement disabled. No InputAction found for input_back: " + input_back)
-		can_move = false
-	if can_jump and not InputMap.has_action(input_jump):
-		push_error("Jumping disabled. No InputAction found for input_jump: " + input_jump)
-		can_jump = false
-	if can_sprint and not InputMap.has_action(input_sprint):
-		push_error("Sprinting disabled. No InputAction found for input_sprint: " + input_sprint)
-		can_sprint = false
-	if can_freefly and not InputMap.has_action(input_freefly):
-		push_error("Freefly disabled. No InputAction found for input_freefly: " + input_freefly)
-		can_freefly = false
-
-func enter_interior():
-	var main = get_tree().get_root().get_node("main")
-	if main:
-		main.load_interior()
+func end_interaction():
+	if current_interactable:
+		current_interactable.end_drag()
+		current_interactable = null

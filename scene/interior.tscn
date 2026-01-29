@@ -1763,9 +1763,6 @@ material_override = SubResource("ShaderMaterial_6a6tl")
 mesh = SubResource("ArrayMesh_gbvt0")
 skeleton = NodePath("")
 
-[node name="Forward" type="Marker3D" parent="map/door-holder-all-house/Door6"]
-transform = Transform3D(14.430677, 4.4660657e-09, -0.0026179932, -1.3511004e-08, 4.77008, 1.1652901e-12, 0.037779503, 5.9117156e-12, 0.9999974, 0, -0.022047639, -7.450581e-09)
-
 [node name="SFX_Open" type="AudioStreamPlayer3D" parent="map/door-holder-all-house/Door6"]
 stream = ExtResource("16_7k0s6")
 attenuation_model = 2
@@ -1937,9 +1934,6 @@ material_override = SubResource("ShaderMaterial_6a6tl")
 mesh = SubResource("ArrayMesh_gbvt0")
 skeleton = NodePath("")
 
-[node name="Forward" type="Marker3D" parent="map/door-holder-all-house/Door7"]
-transform = Transform3D(14.430677, 4.4660657e-09, -0.0026179932, -1.3511004e-08, 4.77008, 1.1652901e-12, 0.037779503, 5.9117156e-12, 0.9999974, 0, -0.022047639, -7.450581e-09)
-
 [node name="SFX_Open" type="AudioStreamPlayer3D" parent="map/door-holder-all-house/Door7"]
 stream = ExtResource("16_7k0s6")
 attenuation_model = 2
@@ -2046,30 +2040,8 @@ script = ExtResource("12_pybyw")
 [node name="Hinge" type="Node3D" parent="map/door-holder-all-house/Door8"]
 transform = Transform3D(0.9986295, 0.05233596, 0, -0.05233596, 0.99862945, -2.842171e-14, -1.7763568e-15, 5.684342e-14, 0.99999994, 0.074406624, -0.0065131187, 0.15982945)
 
-[node name="Hinge Middle Casing_Hinges Metal_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door8/Hinge"]
-transform = Transform3D(0.99999994, 3.7252903e-09, 0, -7.450581e-09, 0.99999994, 0, -1.7763568e-15, 2.842171e-14, 0.9999999, 0.001168251, 0.0015454292, 0)
-mesh = SubResource("ArrayMesh_xpwnt")
-skeleton = NodePath("")
-
-[node name="Hinge Middle Door_Hinges Metal_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door8/Hinge"]
-transform = Transform3D(1, 0, 1.7763568e-15, -3.7252903e-09, 1, 0, 0, 2.842171e-14, 0.99999994, 0.0033512115, 0.0022300482, 2.9802322e-08)
-material_override = SubResource("ShaderMaterial_6a6tl")
-mesh = SubResource("ArrayMesh_8nnca")
-skeleton = NodePath("")
-
 [node name="housedoor" type="Node3D" parent="map/door-holder-all-house/Door8/Hinge"]
 transform = Transform3D(1, 0, 1.7763568e-15, -3.7252903e-09, 1, 0, 0, 2.842171e-14, 0.99999994, 0.032473564, 0.001701951, 0)
-
-[node name="Knob Strike Plate" type="Node3D" parent="map/door-holder-all-house/Door8/Hinge/housedoor"]
-transform = Transform3D(1, 3.7252903e-09, 1.7763568e-15, -3.7252903e-09, 1.0000001, 2.842171e-14, -3.5527137e-15, 2.842171e-14, 1, -0.029575348, 0.0077129602, -0.028384477)
-
-[node name="Knob Strike Plate_Knob Metal 2_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door8/Hinge/housedoor/Knob Strike Plate"]
-mesh = SubResource("ArrayMesh_nocm7")
-skeleton = NodePath("")
-
-[node name="Knob Strike Plate_Knob Metal_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door8/Hinge/housedoor/Knob Strike Plate"]
-mesh = SubResource("ArrayMesh_r51u3")
-skeleton = NodePath("")
 
 [node name="house_door" type="MeshInstance3D" parent="map/door-holder-all-house/Door8/Hinge/housedoor"]
 transform = Transform3D(0.99950665, -0.031410765, -1.7763568e-15, 0.03141076, 0.99950665, 5.684342e-14, 8.881784e-16, 0, 0.99999994, -0.03863907, -0.002964139, -0.16057822)
@@ -2097,22 +2069,6 @@ skeleton = NodePath("")
 material_override = SubResource("ShaderMaterial_6a6tl")
 mesh = SubResource("ArrayMesh_sse1h")
 skeleton = NodePath("")
-
-[node name="Knob Latch" type="Node3D" parent="map/door-holder-all-house/Door8/Hinge/housedoor"]
-transform = Transform3D(1, 3.7252903e-09, 1.7763568e-15, -3.7252903e-09, 1.0000001, 2.842171e-14, -3.5527137e-15, 2.842171e-14, 1, -0.028463364, 0.008273959, -0.028384477)
-
-[node name="Knob Latch_Knob Metal 2_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door8/Hinge/housedoor/Knob Latch"]
-material_override = SubResource("ShaderMaterial_6a6tl")
-mesh = SubResource("ArrayMesh_jnw0p")
-skeleton = NodePath("")
-
-[node name="Knob Latch_Knob Metal_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door8/Hinge/housedoor/Knob Latch"]
-material_override = SubResource("ShaderMaterial_6a6tl")
-mesh = SubResource("ArrayMesh_gbvt0")
-skeleton = NodePath("")
-
-[node name="Forward" type="Marker3D" parent="map/door-holder-all-house/Door8"]
-transform = Transform3D(14.430677, 4.4660657e-09, -0.0026179932, -1.3511004e-08, 4.77008, 1.1652901e-12, 0.037779503, 5.9117156e-12, 0.9999974, 0, -0.022047639, -7.450581e-09)
 
 [node name="SFX_Open" type="AudioStreamPlayer3D" parent="map/door-holder-all-house/Door8"]
 stream = ExtResource("16_7k0s6")
@@ -2213,6 +2169,142 @@ material_override = SubResource("ShaderMaterial_6a6tl")
 mesh = SubResource("ArrayMesh_go54u")
 skeleton = NodePath("")
 
+[node name="Door10" type="Node3D" parent="map/door-holder-all-house"]
+transform = Transform3D(-9.236531, 0.5028189, 1.7982205e-07, 9.794039e-22, -3.3081324e-06, 9.250208, 0.5028189, 9.236532, 3.3032413e-06, -85.322685, 0.63387156, 16.187742)
+script = ExtResource("12_pybyw")
+
+[node name="Hinge" type="Node3D" parent="map/door-holder-all-house/Door10"]
+transform = Transform3D(0.9986295, 0.05233596, 0, -0.05233596, 0.99862945, -2.842171e-14, -1.7763568e-15, 5.684342e-14, 0.99999994, 0.074406624, -0.0065131187, 0.15982945)
+
+[node name="housedoor" type="Node3D" parent="map/door-holder-all-house/Door10/Hinge"]
+transform = Transform3D(1, 0, 1.7763568e-15, -3.7252903e-09, 1, 0, 0, 2.842171e-14, 0.99999994, 0.032473564, 0.001701951, 0)
+
+[node name="house_door" type="MeshInstance3D" parent="map/door-holder-all-house/Door10/Hinge/housedoor"]
+transform = Transform3D(0.9995066, -0.03141076, -3.330669e-15, 0.03141076, 0.9995066, 5.684342e-14, 1.7763568e-15, 0, 0.9999998, -0.038638115, -0.002964139, -0.16057819)
+material_override = SubResource("ShaderMaterial_6a6tl")
+mesh = SubResource("ArrayMesh_jh2cw")
+skeleton = NodePath("")
+
+[node name="house_door" type="StaticBody3D" parent="map/door-holder-all-house/Door10/Hinge/housedoor/house_door" groups=["doors"]]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -2.842171e-14, 0, 2.842171e-14, 0.99999994, 0, 0, 0.004660256)
+collision_layer = 3
+collision_mask = 3
+
+[node name="house_door" type="CollisionShape3D" parent="map/door-holder-all-house/Door10/Hinge/housedoor/house_door/house_door"]
+shape = SubResource("ConvexPolygonShape3D_wuhuk")
+
+[node name="Knob Thumbturn" type="Node3D" parent="map/door-holder-all-house/Door10/Hinge/housedoor/house_door"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -2.842171e-14, 0, 2.842171e-14, 0.99999994, -0.12977813, 0.00090494193, 0.13144499)
+
+[node name="Knob Thumbturn_Knob Metal 2_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door10/Hinge/housedoor/house_door/Knob Thumbturn"]
+material_override = SubResource("ShaderMaterial_6a6tl")
+mesh = SubResource("ArrayMesh_4kiwx")
+skeleton = NodePath("")
+
+[node name="Knob Thumbturn_Knob Metal_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door10/Hinge/housedoor/house_door/Knob Thumbturn"]
+material_override = SubResource("ShaderMaterial_6a6tl")
+mesh = SubResource("ArrayMesh_sse1h")
+skeleton = NodePath("")
+
+[node name="SFX_Open" type="AudioStreamPlayer3D" parent="map/door-holder-all-house/Door10"]
+stream = ExtResource("16_7k0s6")
+attenuation_model = 2
+unit_size = 2.0
+max_distance = 12.0
+
+[node name="Casing_001" type="Node3D" parent="map/door-holder-all-house/Door10"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -2.842171e-14, 0, 2.842171e-14, 0.99999994, 0, -0.00857234, 0.32051623)
+
+[node name="Casing_001_Trim_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door10/Casing_001"]
+material_override = SubResource("ShaderMaterial_c16wh")
+mesh = SubResource("ArrayMesh_soiuc")
+skeleton = NodePath("")
+
+[node name="house_door" type="StaticBody3D" parent="map/door-holder-all-house/Door10/Casing_001/Casing_001_Trim_0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map/door-holder-all-house/Door10/Casing_001/Casing_001_Trim_0/house_door"]
+shape = SubResource("ConcavePolygonShape3D_6a6tl")
+
+[node name="total_green" parent="map/door-holder-all-house/Door10/Casing_001" instance=ExtResource("6_j77yu")]
+transform = Transform3D(0.00030367682, -0.06769657, -1.94079e-06, -0.00084460236, -2.0506483e-05, 0.0066620708, 0.14865117, 0.00013817911, 3.7856476e-05, 0.09440327, 0.024061084, 0.1160081)
+
+[node name="Door Stop" type="Node3D" parent="map/door-holder-all-house/Door10"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -2.842171e-14, 0, 2.842171e-14, 0.99999994, 0, -0.000952363, 0)
+
+[node name="Door Stop_Trim_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door10/Door Stop"]
+mesh = SubResource("ArrayMesh_sps3y")
+skeleton = NodePath("")
+
+[node name="Casing_Trim_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door10"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -2.842171e-14, 0, 2.842171e-14, 0.99999994, -0.08239174, -0.00857234, 0)
+material_override = SubResource("ShaderMaterial_6a6tl")
+mesh = SubResource("ArrayMesh_afurj")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="map/door-holder-all-house/Door10/Casing_Trim_0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map/door-holder-all-house/Door10/Casing_Trim_0/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_c16wh")
+
+[node name="Casing_002_Trim_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door10"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -2.842171e-14, 0, 2.842171e-14, 0.99999994, 0.082390785, -0.00857234, 0)
+material_override = SubResource("ShaderMaterial_6a6tl")
+mesh = SubResource("ArrayMesh_6igvo")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="map/door-holder-all-house/Door10/Casing_002_Trim_0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map/door-holder-all-house/Door10/Casing_002_Trim_0/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_i63sv")
+
+[node name="Casing_003_Trim_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door10"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -2.842171e-14, 0, 2.842171e-14, 0.99999994, 0.082390785, 0.008572578, 0)
+material_override = SubResource("ShaderMaterial_6a6tl")
+mesh = SubResource("ArrayMesh_h08lo")
+skeleton = NodePath("")
+
+[node name="Casing_004_Trim_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door10"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -2.842171e-14, 0, 2.842171e-14, 0.99999994, 0, 0.008572578, 0.32051623)
+material_override = SubResource("ShaderMaterial_6a6tl")
+mesh = SubResource("ArrayMesh_tait2")
+skeleton = NodePath("")
+
+[node name="Casing_005_Trim_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door10"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -2.842171e-14, 0, 2.842171e-14, 0.99999994, -0.08239174, 0.008572578, 0)
+material_override = SubResource("ShaderMaterial_6a6tl")
+mesh = SubResource("ArrayMesh_jesac")
+skeleton = NodePath("")
+
+[node name="Door Jamb_Trim_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door10"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -2.842171e-14, 0, 2.842171e-14, 0.99999994, -0.071676254, 1.1920929e-07, 0)
+material_override = SubResource("ShaderMaterial_6a6tl")
+mesh = SubResource("ArrayMesh_c5dev")
+skeleton = NodePath("")
+
+[node name="Door Jamb_001_Trim_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door10"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -2.842171e-14, 0, 2.842171e-14, 0.99999994, 0, 1.1920929e-07, 0.30718118)
+material_override = SubResource("ShaderMaterial_6a6tl")
+mesh = SubResource("ArrayMesh_hmekg")
+skeleton = NodePath("")
+
+[node name="Door Jamb_002_Trim_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door10"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -2.842171e-14, 0, 2.842171e-14, 0.99999994, 0.0716753, 1.1920929e-07, 0)
+material_override = SubResource("ShaderMaterial_6a6tl")
+mesh = SubResource("ArrayMesh_sodsh")
+skeleton = NodePath("")
+
+[node name="Door Stop_001_Trim_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door10"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -2.842171e-14, 0, 2.842171e-14, 0.99999994, 0, -0.0009524822, 0.30718118)
+material_override = SubResource("ShaderMaterial_6a6tl")
+mesh = SubResource("ArrayMesh_bdgh7")
+skeleton = NodePath("")
+
+[node name="Door Stop_002_Trim_0" type="MeshInstance3D" parent="map/door-holder-all-house/Door10"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, -2.842171e-14, 0, 2.842171e-14, 0.99999994, 0.06905651, -0.000952363, 0)
+material_override = SubResource("ShaderMaterial_6a6tl")
+mesh = SubResource("ArrayMesh_go54u")
+skeleton = NodePath("")
+
 [node name="Door9" type="Node3D" parent="map/door-holder-all-house"]
 transform = Transform3D(0.49749872, 9.23682, 3.303344e-06, 9.794039e-22, -3.3081324e-06, 9.250208, 9.236819, -0.49749872, -1.7791916e-07, -64.46783, 0.6012355, 14.694856)
 script = ExtResource("12_pybyw")
@@ -2284,9 +2376,6 @@ skeleton = NodePath("")
 material_override = SubResource("ShaderMaterial_6a6tl")
 mesh = SubResource("ArrayMesh_gbvt0")
 skeleton = NodePath("")
-
-[node name="Forward" type="Marker3D" parent="map/door-holder-all-house/Door9"]
-transform = Transform3D(14.430677, 4.4660657e-09, -0.0026179932, -1.3511004e-08, 4.77008, 1.1652901e-12, 0.037779503, 5.9117156e-12, 0.9999974, 0, -0.022047639, -7.450581e-09)
 
 [node name="SFX_Open" type="AudioStreamPlayer3D" parent="map/door-holder-all-house/Door9"]
 stream = ExtResource("16_7k0s6")
@@ -2424,12 +2513,6 @@ transform = Transform3D(-0.03442356, 0.002573905, -0.9994041, 0.012625287, 0.999
 
 [node name="player" parent="." instance=ExtResource("3_g38d4")]
 transform = Transform3D(0.5854163, 0, 0.017155755, 0, 0.6979295, 0, -0.010044746, 0, 0.99985284, -88.36641, 1.0559716, 14.0338745)
-can_sprint = true
-can_freefly = true
-input_left = "left"
-input_right = "right"
-input_forward = "forward"
-input_back = "backward"
 
 [node name="lamp&light" type="Node3D" parent="."]
 
