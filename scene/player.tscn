@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bs72ogkvdd7d6"]
+[gd_scene load_steps=8 format=3 uid="uid://bs72ogkvdd7d6"]
 
 [ext_resource type="Script" uid="uid://bjacmgknmjsm8" path="res://script/player.gd" id="1_ucva2"]
 [ext_resource type="Script" uid="uid://cpq0vs1dplx55" path="res://script/fps_label.gd" id="2_hjaqi"]
+[ext_resource type="Script" uid="uid://bpknp3w0csj03" path="res://scene/reticle-crosshair.gd" id="3_fvtld"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
 albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
@@ -76,28 +77,19 @@ mouse_filter = 2
 
 [node name="ui-cross" type="CanvasLayer" parent="HUD"]
 
-[node name="TextureRect" type="TextureRect" parent="HUD/ui-cross"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-mouse_filter = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect" type="ColorRect" parent="HUD/ui-cross/TextureRect"]
-layout_mode = 1
+[node name="Reticle" type="Control" parent="HUD/ui-cross" groups=["reticle"]]
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 1.0
-offset_bottom = 1.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-color = Color(0.8117647, 0.8117647, 0.8117647, 1)
+script = ExtResource("3_fvtld")
+radius = 2.0
+reticle_color = Color(0.67481464, 0.67481464, 0.6748146, 1)

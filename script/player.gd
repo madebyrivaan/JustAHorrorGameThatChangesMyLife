@@ -18,6 +18,7 @@ extends CharacterBody3D
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var ray: RayCast3D = $Head/Camera3D/RayCast3D
+@onready var reticle = get_tree().get_first_node_in_group("reticle")
 
 # --- STATE ---
 var mouse_captured : bool = false
@@ -58,6 +59,23 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	# If we are dragging a door, FREEZE movement completely
+	# --- RETICLE INTERACTION CHECK ---
+	if reticle:
+		if ray.is_colliding():
+			var hit = ray.get_collider()
+			var node = hit
+			var found := false
+
+			while node:
+				if node.has_method("start_drag"):
+					found = true
+					break
+				node = node.get_parent()
+
+			reticle.set_interactable(found)
+		else:
+			reticle.set_interactable(false)
+
 	if current_interactable != null:
 		velocity = Vector3.ZERO
 		return
@@ -92,6 +110,7 @@ func try_begin_interaction():
 		var node = hit
 		while node:
 			if node.has_method("start_drag"):
+				
 				current_interactable = node
 				current_interactable.start_drag(self)
 				return
