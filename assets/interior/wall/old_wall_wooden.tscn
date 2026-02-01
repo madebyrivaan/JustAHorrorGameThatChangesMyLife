@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cf1u7g4q14woa"]
+
+[ext_resource type="PackedScene" uid="uid://b3yh1hide8sxg" path="res://assets/interior/wall/total_green.tscn" id="1_ykh7g"]
+[ext_resource type="Material" uid="uid://dcf8w65j0myyn" path="res://texture/material/new_standard_material_3d.tres" id="2_g8tia"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_tyg7w"]
+
+[node name="old-wall-wooden" type="Node3D"]
+
+[node name="total_green" parent="." instance=ExtResource("1_ykh7g")]
+
+[node name="Cube" parent="total_green" index="0"]
+transform = Transform3D(0.2, 0, 0, 0, 3.484927, 0, 0, 0, 2.5291586, -0.5864032, 1.4179288, 0.17110787)
+material_override = ExtResource("2_g8tia")
+mesh = SubResource("BoxMesh_tyg7w")
+
+[node name="CollisionShape3D" parent="total_green/Cube/StaticBody3D" index="0"]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.52151155, 0, 0, 0, 0.47928852, 0, 0, 0)
+
+[editable path="total_green"]

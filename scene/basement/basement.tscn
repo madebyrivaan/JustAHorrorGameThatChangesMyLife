@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://blhs8mddap7vu" path="res://assets/basement/scene-assets/statue.tscn" id="6_8cbf8"]
 [ext_resource type="PackedScene" uid="uid://dufrtv6sg4fqo" path="res://assets/basement/pillar.tscn" id="6_n8xyc"]
 [ext_resource type="PackedScene" uid="uid://dpxgiroudoqik" path="res://assets/basement/scene-assets/ship_lamp.glb" id="7_kxtpf"]
-[ext_resource type="PackedScene" uid="uid://dd52ow4s5h62t" path="res://scene/interior/world_environment_interior.tscn" id="8_pnrkn"]
+[ext_resource type="PackedScene" uid="uid://dd52ow4s5h62t" path="res://world_environment_interior.tscn" id="8_pnrkn"]
 [ext_resource type="PackedScene" uid="uid://c2fqj5irhuy4r" path="res://assets/basement/scene-assets/wooden_back_bar_cabinet_-_4096px2.glb" id="9_jm015"]
 [ext_resource type="Texture2D" uid="uid://c5gk1bqq5ask1" path="res://assets/basement/scene-assets/sprite-256px-36 (5).png" id="10_2tuaf"]
 [ext_resource type="PackedScene" uid="uid://djxtf12c05x1w" path="res://assets/basement/scene-assets/lamp.glb" id="10_whsk8"]
@@ -359,12 +359,6 @@ data = PackedVector3Array(-0.5352, -0.33609998, 0.5049, -0.5621, -0.33609998, 0.
 
 [node name="player" parent="." instance=ExtResource("1_bbdnv")]
 transform = Transform3D(0.044236515, 0, -0.9971418, 0, 0.6979295, 0, 0.583829, 0, 0.075553074, 1.8248088, 0.17506409, 7.3667116)
-can_sprint = true
-can_freefly = true
-input_left = "left"
-input_right = "right"
-input_forward = "forward"
-input_back = "backward"
 
 [node name="wall" type="Node3D" parent="."]
 
@@ -731,6 +725,7 @@ lod_bias = 0.4
 lod_bias = 0.4
 
 [node name="Cylinder189" parent="light/main-light" index="6"]
+transform = Transform3D(0.034439925, 0.0018049191, -4.5330883e-10, -3.7744358e-10, -1.4594659e-09, -0.034487188, -0.0018049191, 0.034439925, -1.437712e-09, 0, 0, 0)
 lod_bias = 0.4
 
 [node name="Cylinder190" parent="light/main-light" index="7"]
@@ -1047,6 +1042,9 @@ shape = SubResource("ConcavePolygonShape3D_f3fja")
 
 [node name="Sketchfab_Scene8" parent="props" instance=ExtResource("9_jm015")]
 transform = Transform3D(0.6803756, 0, 0.73286366, 0, 1.3318949, 0, -0.73286366, 0, 0.6803756, -0.6335238, -0.15681297, -9.790792)
+
+[node name="Bar Cabinet_BarCabinet_MTL_0" parent="props/Sketchfab_Scene8/Sketchfab_model/992e982dc9a046ebb7cedc47172dd686_fbx/RootNode/Bar Cabinet" index="0"]
+transform = Transform3D(0.8390696, 0.5440241, 0, -0.5440241, 0.8390696, 0, 0, 0, 1, -0.3049162, -0.9723851, 2.6645353e-15)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="props/Sketchfab_Scene8/Sketchfab_model/992e982dc9a046ebb7cedc47172dd686_fbx/RootNode/Bar Cabinet/Bar Cabinet_BarCabinet_MTL_0" index="0"]
 

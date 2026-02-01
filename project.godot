@@ -35,7 +35,7 @@ Shortcuts/density_decrement=Object(Shortcut,"resource_local_to_scene":false,"res
 [application]
 
 config/name="New Horror game"
-run/main_scene="uid://dgcxrggy0ppyv"
+run/main_scene="uid://cpqbjer6ui2lo"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -56,6 +56,10 @@ enabled=PackedStringArray("res://addons/simplegrasstextured/plugin.cfg")
 folder_colors={
 "res://assets/interior/window/": "purple"
 }
+
+[filesystem]
+
+import/blender/enabled=false
 
 [global_group]
 

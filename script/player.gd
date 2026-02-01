@@ -4,7 +4,7 @@ extends CharacterBody3D
 @export_group("Movement")
 @export var speed_walk : float = 2.5
 @export var speed_run : float = 4.5
-@export var jump_force : float = 4.0
+@export var jump_force : float = 2
 @export var gravity : float = 9.8
 
 @export_group("Camera")
@@ -63,10 +63,13 @@ func _physics_process(delta: float) -> void:
 	if reticle:
 		if ray.is_colliding():
 			var hit = ray.get_collider()
+			if hit.is_in_group("doors"):
+				print("in doors group")
 			var node = hit
 			var found := false
 
 			while node:
+				print("walker:", node.name, "has_method:", node.has_method("start_drag"))
 				if node.has_method("start_drag"):
 					found = true
 					break
@@ -104,11 +107,15 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func try_begin_interaction():
+	
 	if ray.is_colliding():
 		var hit = ray.get_collider()
+		if hit.is_in_group("doors"):
+			print("in doors group")
 		# Look for the physics body's parent or the node itself
 		var node = hit
 		while node:
+			print("walker:", node.name, "has_method:", node.has_method("start_drag"))
 			if node.has_method("start_drag"):
 				
 				current_interactable = node
