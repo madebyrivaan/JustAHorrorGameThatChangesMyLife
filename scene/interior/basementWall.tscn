@@ -1,36 +1,3 @@
-[gd_scene load_steps=8 format=3 uid="uid://bgbii53hn6ovg"]
-
-[ext_resource type="PackedScene" uid="uid://b3yh1hide8sxg" path="res://assets/interior/wall/total_green.tscn" id="1_xtwcm"]
-[ext_resource type="Shader" uid="uid://rt4mivkuogb1" path="res://assets/interior/texture&shader/basementWall.gdshader" id="2_xtwcm"]
-[ext_resource type="Texture2D" uid="uid://2jdigj6wha1e" path="res://assets/interior/texture&shader/texture(img)/worn_mossy_plasterwall_diff_2k.jpg" id="3_u4g7w"]
-[ext_resource type="Texture2D" uid="uid://b24gu72p7oohv" path="res://assets/interior/texture&shader/texture(img)/worn_mossy_plasterwall_disp_2k.png" id="4_uhpke"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_38fri"]
-noise_type = 3
-frequency = 0.3
-fractal_octaves = 3
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dohh3"]
-noise = SubResource("FastNoiseLite_38fri")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ddq8o"]
-render_priority = 0
-shader = ExtResource("2_xtwcm")
-shader_parameter/albedo_tex = ExtResource("3_u4g7w")
-shader_parameter/roughness_tex = ExtResource("4_uhpke")
-shader_parameter/noise_tex = SubResource("NoiseTexture2D_dohh3")
-shader_parameter/tint_color = Color(1, 1, 1, 1)
-shader_parameter/grime_strength = 0.45
-shader_parameter/roughness_boost = 0.2
-shader_parameter/normal_strength = 1.0
-
-[node name="Node3D" type="Node3D"]
-
-[node name="total_green" parent="." instance=ExtResource("1_xtwcm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23883176, 0, 0.9318373)
-
-[node name="Cube" parent="total_green" index="0"]
-transform = Transform3D(0.2, 0, 0, 0, 1.2499998, 0, 0, 0, 2.2934225, -0.5864032, 1.4179288, 0.17110789)
-material_override = SubResource("ShaderMaterial_ddq8o")
-
-[editable path="total_green"]
+version https://git-lfs.github.com/spec/v1
+oid sha256:de20648c6ee4ce4dbe0fb821b4663d257289ee72d500a6df0636b3903c2b37da
+size 1743
