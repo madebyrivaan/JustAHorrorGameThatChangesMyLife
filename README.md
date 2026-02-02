@@ -1,46 +1,114 @@
-# Sketchfab Plugin Redone For Godot 4.0
-**Import models from Sketchfab to Godot (v4.0+)**
+# 🕯️ PROJECT BTS
 
-* [Installation](#Installation)
-* [Login](#Login)
-* [Import a model from Sketchfab](#import-a-model-from-sketchfab)
-* [Report an issue](#report-an-issue)
+_A Psychological Horror Experience (Pre-Alpha)_
 
-## Installation
+> A first-person psychological horror game focused on atmosphere, realism, and environmental storytelling.
 
-Download the **sketchfab.zip** archive attached to the [latest release](https://github.com/StrayEddy/sketchfab-godot-plugin/releases/latest) of the plugin, and unzip it.
+---
 
-If you already have some plugins installed in your project, you will only need to copy the extracted directory to the `addons` directory (which you will need to create first if you did not use plugins previously).
+## 🧠 About the Game
 
-You should therefore end up with this structure: `PROJECT_DIRECTORY/addons/sketchfab/[Zip content]`
+**PROJECT BTS** is a solo-developed psychological horror game built with Godot.
 
-Please note that if Godot is running, you might need to quit the editor and reopen it before loading the plugin.
+The experience emphasizes:
 
-Finally, you need to activate the plugin by going in the project settings (`Project -> Project settings`), and enabling the "Sketchfab" plugin in the Plugins tab.
+- Immersive lighting and shadows
+- Realistic interiors
+- Subtle environmental storytelling
+- Slow-burn tension over cheap jump scares
 
-The Sketchfab plugin should now be available in your project's tabs:
+You wake up in an unfamiliar room.
 
-![godot1](https://user-images.githubusercontent.com/4066133/37650349-fabdf0e8-2c34-11e8-8c89-f7ecf5210472.JPG)
+Something feels wrong.
 
-## Login
+This pre-alpha build represents the **opening room** of the game — a visual + mood prototype that sets the tone for the full experience.
 
-This plugin relies on the [Sketchfab download API](https://sketchfab.com/developers/download-api): a Sketchfab account is therefore **REQUIRED** to be able to download and import content from Sketchfab.
+---
 
-If you don't have one already, you can create it [here](https://sketchfab.com/signup).
+## 🎮 Current Features (Pre-Alpha)
 
-Use your account email and password to login through the plugin interface, and you should now be able to import models from Sketchfab !
+- First-person exploration
+- Fully lit start room environment
+- Dynamic lighting and shadow interaction
+- Real-time reflections and material response
+- Early performance optimization pass
+- Custom environment assets and layout
 
-## Import a model from Sketchfab
+This version focuses on **visual direction and atmosphere**, not full gameplay yet.
 
-Select the "Sketchfab" tab to open the browser window, and start browsing the library of 300k+ free models available on Sketchfab.
+---
 
-![godot2](https://user-images.githubusercontent.com/4066133/37650422-2e4c975c-2c35-11e8-8bf0-5cb6f3c972b7.JPG)
+## 🛠️ Built With Love ❤️
 
-To download and import an asset, click on a model card to display the corresponding model page, and then click on "Download" to import the selected model into Godot.
-![godot](https://user-images.githubusercontent.com/4066133/39196488-8db285ee-47e2-11e8-850e-82e1712d9bc9.jpg)
+- Godot Engine
+- Custom materials & PBR assets
+- Git + Git LFS for version control
+- Heavy Ray Tracing and 4k Texture everywhere (Just Kidding)
 
-## Report an issue
+---
 
-If you feel like you've encountered a bug, or that the plugin lacks an important feature, you can [create an issue](https://github.com/StrayEddy/sketchfab-godot-plugin/issues/new) in this repository.
+## 🚧 Development Status
 
-If you report a bug, please try to append any log from Godot or additional information (Godot version, Operating System...) in your message.
+**Pre-Alpha**
+
+That means:
+
+- Core gameplay systems are still in progress
+- Story is not finalized
+- Audio and scares are early-stage
+- Optimization is ongoing
+
+Visual quality does NOT represent final performance or content scope.
+
+This build exists to validate:
+
+- Mood
+- Lighting style
+- Environment realism
+- Technical direction
+
+---
+
+## 📸 Screenshots / Clips
+
+(Coming soon)
+
+---
+
+## 🧭 Roadmap (Short Term)
+
+- Interactive objects (TV / doors / props)
+- Ambient audio + spatial sound
+- First story event
+- Basic player objectives
+- Expanded environment
+
+---
+
+## 👤 Developer
+
+Solo project by **Abhiuday**
+
+Indie developer focused on horror atmosphere, realism, and immersive environments.
+
+---
+
+## ⚠️ Disclaimer
+
+This project is in active development.  
+Everything is subject to change.
+
+Feedback is welcome.
+
+---
+
+## ❤️ Support
+
+If you like the direction of this project:
+
+- Star the repository
+- Share screenshots
+- Give feedback
+- Suggest Improvement
+
+It helps more than you think.

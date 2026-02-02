@@ -63,8 +63,6 @@ func _physics_process(delta: float) -> void:
 	if reticle:
 		if ray.is_colliding():
 			var hit = ray.get_collider()
-			if hit.is_in_group("doors"):
-				print("in doors group")
 			var node = hit
 			var found := false
 
@@ -110,8 +108,6 @@ func try_begin_interaction():
 	
 	if ray.is_colliding():
 		var hit = ray.get_collider()
-		if hit.is_in_group("doors"):
-			print("in doors group")
 		# Look for the physics body's parent or the node itself
 		var node = hit
 		while node:
