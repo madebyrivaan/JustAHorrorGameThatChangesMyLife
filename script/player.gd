@@ -19,17 +19,29 @@ extends CharacterBody3D
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var ray: RayCast3D = $Head/Camera3D/RayCast3D
 @onready var reticle = get_tree().get_first_node_in_group("reticle")
+@onready var interact_text: RichTextLabel = $"HUD/interact-text"
+var input_locked := false
 
 # --- STATE ---
 var mouse_captured : bool = false
 # The object we are currently dragging
 var current_interactable : Node = null 
+var current_pickup : Node = null
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	mouse_captured = true
 
+
 func _unhandled_input(event: InputEvent) -> void:
+	if input_locked:
+		return
+	if event.is_action_pressed("interact") and current_pickup:
+		if current_pickup.has_method("interact"):
+			current_pickup.interact(self)
+		current_pickup = null
+
+		
 	if event is InputEventMouseButton:
 		# Capture mouse if we clicked back into window
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -55,10 +67,39 @@ func _unhandled_input(event: InputEvent) -> void:
 			# Normal Camera Look
 			rotate_y(-event.relative.x * mouse_sensitivity)
 			head.rotate_x(-event.relative.y * mouse_sensitivity)
+			
 			head.rotation.x = clamp(head.rotation.x, deg_to_rad(-80), deg_to_rad(80))
+func item_interact(obj:Node) -> void:
+	var node := obj
 
+	while node:
+		if node.has_method("interact"):
+			interact_text.text = "Press E To Pick Up"
+			current_pickup = node
+			return
+
+		node = node.get_parent()
+
+	current_pickup = null
+
+			
 func _physics_process(delta: float) -> void:
-	# If we are dragging a door, FREEZE movement completely
+	if input_locked:
+		reticle.set_interactable(false)
+		current_interactable = null
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
+
+	interact_text.text = ""
+	if input_locked:
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
+	if ray.is_colliding():
+		var hit = ray.get_collider()
+
+		item_interact(hit)
 	# --- RETICLE INTERACTION CHECK ---
 	if reticle:
 		if ray.is_colliding():
@@ -67,7 +108,6 @@ func _physics_process(delta: float) -> void:
 			var found := false
 
 			while node:
-				print("walker:", node.name, "has_method:", node.has_method("start_drag"))
 				if node.has_method("start_drag"):
 					found = true
 					break
@@ -110,16 +150,21 @@ func try_begin_interaction():
 		var hit = ray.get_collider()
 		# Look for the physics body's parent or the node itself
 		var node = hit
-		while node:
-			print("walker:", node.name, "has_method:", node.has_method("start_drag"))
-			if node.has_method("start_drag"):
+		# 🔥 HARD FILTER
+		if hit is Control or hit.is_in_group("pickup"):
+			return
+		else:
+			while node:
+				if node.has_method("start_drag"):
 				
-				current_interactable = node
-				current_interactable.start_drag(self)
-				return
-			node = node.get_parent()
+					current_interactable = node
+					current_interactable.start_drag(self)
+					return
+				node = node.get_parent()
 
 func end_interaction():
 	if current_interactable:
 		current_interactable.end_drag()
 		current_interactable = null
+func set_input_locked(value: bool) -> void:
+	input_locked = value

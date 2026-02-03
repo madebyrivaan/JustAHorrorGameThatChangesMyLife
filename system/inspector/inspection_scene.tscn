@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxqimqv1ci5oe"]
+
+[ext_resource type="Script" uid="uid://cp3g0hajdo2m5" path="res://system/inspector/inspection_scene.gd" id="1_34om0"]
+
+[node name="InspectionScene" type="CanvasLayer"]
+script = ExtResource("1_34om0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.99744076, 0.04070203, -0.058781195, 0, 0.82214403, 0.56927955, 0.07149744, -0.56782264, 0.82004, 0, 0, 0)
+shadow_enabled = true
+
+[node name="DarkOverlay" type="ColorRect" parent="."]
+offset_right = 1138.0
+offset_bottom = 661.0
+color = Color(0, 0, 0, 1)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = -1
+anchor_right = 0.98200005
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -3.0
+offset_right = 151.73596
+offset_bottom = 2.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1140, 652)
+render_target_update_mode = 4
+
+[node name="InspectionWorld" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/InspectionWorld"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2624208)
+current = true
+fov = 45.0
+
+[node name="ItemHolder" type="Node3D" parent="SubViewportContainer/SubViewport/InspectionWorld"]
+transform = Transform3D(71.70229, 0, 0, 0, 79.88845, 0, 0, 0, 1, 0, 0, -1.7611177)

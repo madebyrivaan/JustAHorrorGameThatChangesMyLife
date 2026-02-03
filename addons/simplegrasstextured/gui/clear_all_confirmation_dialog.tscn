@@ -1,3 +1,13 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2b764105ed6108138b0252e5244378fd4819486b5e61fcfa39d1d8586863099e
-size 583
+[gd_scene load_steps=2 format=3 uid="uid://c1242d1bef7lb"]
+
+[ext_resource type="Script" uid="uid://wckg68rm05vd" path="res://addons/simplegrasstextured/gui/clear_all_confirmation_dialog.gd" id="1_xk6u2"]
+
+[node name="ClearAllConfirmationDialog" type="ConfirmationDialog"]
+size = Vector2i(377, 109)
+ok_button_text = "Yes"
+dialog_text = "Are you sure you want to remove all the grass?"
+cancel_button_text = "No"
+script = ExtResource("1_xk6u2")
+
+[connection signal="canceled" from="." to="." method="_on_canceled"]
+[connection signal="confirmed" from="." to="." method="_on_confirmed"]

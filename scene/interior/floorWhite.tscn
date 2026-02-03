@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7accc8bb8989f9e72876b57a1ac90357a05863a9d87c64e9b0cf2ba6550e8378
-size 1016
+[gd_scene load_steps=4 format=3 uid="uid://ohhoks6j32jh"]
+
+[ext_resource type="PackedScene" uid="uid://6leswrojrsbm" path="res://assets/interior/house-floor/floor.glb" id="1_wnh2w"]
+[ext_resource type="Material" uid="uid://cfb2nh6wa4hef" path="res://assets/interior/texture&shader/floor.tres" id="2_es2rh"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hf4qh"]
+points = PackedVector3Array(-1, -1, -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, -1, -1, 1, -1, 1, -1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="floor" parent="." instance=ExtResource("1_wnh2w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6353718, -1.1920929e-07, -1.6217594)
+
+[node name="Cube" parent="floor" index="0"]
+material_override = ExtResource("2_es2rh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor/Cube" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/Cube/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_hf4qh")
+
+[editable path="floor"]

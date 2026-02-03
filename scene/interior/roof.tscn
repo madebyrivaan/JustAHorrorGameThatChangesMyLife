@@ -1,3 +1,60 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c7eb1c7e5dc986f34f76ddfde1289e7d3fcb69dd82a8b05b70bb32b622a6b347
-size 3044
+[gd_scene load_steps=8 format=4 uid="uid://i2eqd0u5m173"]
+
+[ext_resource type="Texture2D" uid="uid://bis8yxt65rjvc" path="res://assets/interior/texture&shader/roof/roof_concrete_layers_02_diff_2k.jpg" id="1_1otr7"]
+[ext_resource type="Material" uid="uid://wyukg2obf1tg" path="res://assets/interior/texture&shader/roof-material.tres" id="1_hdpuy"]
+[ext_resource type="Texture2D" uid="uid://lvhq7cupacpc" path="res://assets/interior/texture&shader/roof/roof_Image.png" id="2_hdpuy"]
+[ext_resource type="Texture2D" uid="uid://l5c8t4ocd16v" path="res://assets/interior/texture&shader/roof/roof_concrete_layers_02_nor_gl_2k.png" id="3_8yfo8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sh14"]
+resource_name = "Material.002"
+cull_mode = 2
+albedo_texture = ExtResource("1_1otr7")
+metallic_texture = ExtResource("2_hdpuy")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_hdpuy")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_8yfo8")
+uv1_scale = Vector3(1, 2, 1)
+uv1_offset = Vector3(0, -1, 0)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7jl5h"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAAAEAAEAAwAFAAIABQAAAAIABgAEAAAABQAGAAAABwABAAQABwADAAEABgAHAAQABQADAAcABQAHAAYA"),
+"name": "Material.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAAAAP////8AAAAA//8AAAAAAAAAAP//AAD///////8AAAAAAAAAAAAA//8AAAAAAAD//wAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_1otr7"]
+resource_name = "roof_Cube_001"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("/5//f//f/z//3/9//5//P/9f/z//nwAA/5//P/9fAAD/X////5//v/+f////X/+//x//f/9f/z//X/9//x//P/9f/3//n/8//5//f/9f/z//X/+//5//f/+f/7//X/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_2sh14"),
+"name": "Material.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAA//8AAP///////wAA//8AAP///////////////wAA////vwAA//////+//////////78AAAAA////vwAAAAD//1TVAAD//wAAVNUAAP////9U1QAAAAAAAFTVAAAAAAAA/7///wAA////v///AAAAAP+/AAAAAP///7///wAAAABU1f///////1TV/////wAAVNX//wAA//9U1QAAAAAAAP///////wAA//8AAP//AAD/////AAAAAP///3//v/9//7//f/+//3//v/////////////////////9U1VTVVNVU1VTVVNVU1VTVAAD/fwAA/38AAP9/AAD/f6oqqiqqKqoqqiqqKqoqqir/v/+//7//v/+//7//v/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_7jl5h")
+
+[node name="roof" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.46424496)
+
+[node name="Cube_001" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.15, 0, 0, 0, 2.5, 0, 0, 0, 3.5, 0.98082906, 0.07110447, -7.05755)
+material_override = ExtResource("1_hdpuy")
+mesh = SubResource("ArrayMesh_1otr7")
+skeleton = NodePath("")

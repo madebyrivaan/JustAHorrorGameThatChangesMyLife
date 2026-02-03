@@ -1,3 +1,95 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:917227fcb1f4ff4e85ea942ecf490ed057841a393306cec191e16f17f739b3f9
-size 3009
+[gd_scene format=3 uid="uid://bs72ogkvdd7d6"]
+
+[ext_resource type="Script" uid="uid://bjacmgknmjsm8" path="res://script/player.gd" id="1_ucva2"]
+[ext_resource type="Script" uid="uid://cpq0vs1dplx55" path="res://script/fps_label.gd" id="2_hjaqi"]
+[ext_resource type="Script" uid="uid://bpknp3w0csj03" path="res://scene/reticle-crosshair.gd" id="3_fvtld"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
+albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ucva2"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iof21"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="LabelSettings" id="LabelSettings_xo3ru"]
+font_size = 17
+
+[node name="ProtoController" type="CharacterBody3D" unique_id=461699112 groups=["player"]]
+script = ExtResource("1_ucva2")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=864265238]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+material_override = SubResource("StandardMaterial3D_iof21")
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_ucva2")
+
+[node name="Collider" type="CollisionShape3D" parent="." unique_id=1082955778]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_iof21")
+
+[node name="Head" type="Node3D" parent="." unique_id=1130136499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5017686, -0.16087961)
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=318046591 groups=["camera"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06923199, 0.095374584)
+fov = 56.8
+far = 30.45
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=382945865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03500414, 0.039761186)
+target_position = Vector3(0, 0, -2)
+collision_mask = 2
+debug_shape_custom_color = Color(0.6418067, 0, 0.11439655, 1)
+debug_shape_thickness = 5
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1054021020]
+
+[node name="Label" type="Label" parent="HUD" unique_id=1689680794]
+anchors_preset = -1
+anchor_right = 0.035
+anchor_bottom = 0.035
+offset_right = -0.3199997
+offset_bottom = 0.3199997
+text = "FPS"
+label_settings = SubResource("LabelSettings_xo3ru")
+script = ExtResource("2_hjaqi")
+metadata/_edit_use_anchors_ = true
+
+[node name="interact-text" type="RichTextLabel" parent="HUD" unique_id=930453466]
+anchors_preset = -1
+anchor_left = 0.437
+anchor_top = 0.41400003
+anchor_right = 0.707
+anchor_bottom = 0.5
+offset_left = -0.42401123
+offset_top = -1.2720337
+offset_right = -0.46398926
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="ui-cross" type="CanvasLayer" parent="HUD" unique_id=2131329793]
+
+[node name="Reticle" type="Control" parent="HUD/ui-cross" unique_id=73346561 groups=["reticle"]]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_fvtld")
+radius = 2.0
+reticle_color = Color(0.67481464, 0.67481464, 0.6748146, 1)

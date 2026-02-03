@@ -1,3 +1,35 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:189e57a0a500be983027d48b97119dda583a9a3c0be9d6604873bace770e7726
-size 1190
+[gd_scene format=3 uid="uid://dd52ow4s5h62t"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w0d24"]
+sky_top_color = Color(0.0031412835, 0.0030587274, 0.14667752, 1)
+sky_horizon_color = Color(7.0037174e-07, 0.15827265, 0.2155842, 1)
+ground_bottom_color = Color(0.2811147, 0.62200487, 0.7411732, 1)
+ground_horizon_color = Color(0.7962918, 0.9644489, 1.0420299, 1)
+energy_multiplier = 0.1
+
+[sub_resource type="Sky" id="Sky_lal8t"]
+sky_material = SubResource("ProceduralSkyMaterial_w0d24")
+
+[sub_resource type="Environment" id="Environment_j21it"]
+background_mode = 1
+sky = SubResource("Sky_lal8t")
+sky_custom_fov = 25.7
+ambient_light_color = Color(0.23392558, 0.2339254, 0.23392549, 1)
+ambient_light_energy = 0.85
+tonemap_mode = 4
+glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.4745098, 0.45882353, 0.41960785, 1)
+fog_sun_scatter = 0.2
+fog_density = 0.2
+fog_sky_affect = 0.3
+fog_depth_curve = 0.901
+fog_depth_begin = 3.0
+fog_depth_end = 12.0
+adjustment_enabled = true
+adjustment_contrast = 0.9
+adjustment_saturation = 1.3
+
+[node name="WorldEnvironment" type="WorldEnvironment" unique_id=45293088]
+environment = SubResource("Environment_j21it")

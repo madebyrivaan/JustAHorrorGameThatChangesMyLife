@@ -1,3 +1,114 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:772a024ca89e52a79905a2d8b90b483e7b53ce9854f43136372962ce87c5adf2
-size 5617
+[gd_scene load_steps=15 format=4 uid="uid://brhln6gs34i67"]
+
+[ext_resource type="PackedScene" uid="uid://dgtpk2hjp7fjx" path="res://assets/interior/wall/wall_main.glb" id="1_jyrc3"]
+[ext_resource type="Shader" uid="uid://7stoo14kjacg" path="res://assets/interior/texture&shader/wallGrenn.gdshader" id="2_iux8e"]
+[ext_resource type="Shader" uid="uid://drasly6uc2qes" path="res://assets/interior/texture&shader/strip.gdshader" id="3_6trjo"]
+[ext_resource type="Texture2D" uid="uid://ne70khiph32h" path="res://assets/interior/texture&shader/roof/shades-gray-aged-plaster.jpg" id="4_v4ufv"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_iux8e"]
+noise_type = 3
+frequency = 0.5
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6trjo"]
+noise = SubResource("FastNoiseLite_iux8e")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6trjo"]
+render_priority = 0
+shader = ExtResource("2_iux8e")
+shader_parameter/edge_dirt_strength = 0.4
+shader_parameter/edge_height = 0.25
+shader_parameter/base_color = Color(0.40361676, 0.47141647, 0.42050397, 1)
+shader_parameter/roughness_base = 0.85
+shader_parameter/roughness_variation = 0.25
+shader_parameter/grime_strength = 0.35
+shader_parameter/normal_strength = 0.4
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_6trjo")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yhx0c"]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_color = Color(0.36470595, 0.47843143, 0.38039225, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_cgie1"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_iux8e"]
+resource_name = "wall_main_Cube_001"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_yhx0c"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP//AAD///////8AAP//AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_cgie1")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_iux8e"]
+points = PackedVector3Array(-1, -1, -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, -1, -1, 1, -1, 1, -1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6trjo"]
+points = PackedVector3Array(-0.9984684, -1, -1, 1.1682, 0.997489, 0.997489, 1.1667156, -1, 0.99612045, -1, 0.9975325, 0.9975325, 1.1667156, 0.99612045, -1, -0.9984684, -1, 0.99612045, -0.9984684, 0.99612045, -1, 1.1667156, -1, -1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v4ufv"]
+render_priority = 0
+shader = ExtResource("3_6trjo")
+shader_parameter/detail_tex = ExtResource("4_v4ufv")
+shader_parameter/base_color = Vector3(0.92, 0.92, 0.92)
+shader_parameter/roughness_base = 1.0
+shader_parameter/roughness_strength = 0.55
+shader_parameter/dirt_strength = 0.5
+shader_parameter/edge_dirt_strength = 0.65
+shader_parameter/normal_strength = 0.35
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v4ufv"]
+points = PackedVector3Array(-0.94827986, -1, -1, 3.7554998, 0.98440677, 0.98440677, 3.7037797, 0.96258736, -1, -1, 0.98440677, 0.98440677, 3.7037797, -1, 0.96258736, -0.94827986, 0.96258736, -1, -0.94827986, -1, 0.96258736, 3.7037797, -1, -1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="wall_main" parent="." instance=ExtResource("1_jyrc3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1788793, 0, 0.2977326)
+
+[node name="Cube" parent="wall_main" index="0"]
+material_override = SubResource("ShaderMaterial_6trjo")
+lod_bias = 0.3
+mesh = SubResource("ArrayMesh_iux8e")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="wall_main/Cube" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall_main/Cube/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_iux8e")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="wall_main/Cube_001" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall_main/Cube_001/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_6trjo")
+
+[node name="Cube_002" parent="wall_main" index="2"]
+transform = Transform3D(0.017548973, 0, 0, 0, 0.1, 0, 0, 0, 5, -0.3594731, 0.07983494, 0.16403705)
+material_override = SubResource("ShaderMaterial_v4ufv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="wall_main/Cube_002" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall_main/Cube_002/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_v4ufv")
+
+[editable path="wall_main"]

@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8a62fc6473f9c1d99dff51b90838e9294de8f189f0a96824fe445036d93c57d7
-size 1060
+[gd_scene load_steps=4 format=3 uid="uid://dv5bcswaw3uyj"]
+
+[ext_resource type="PackedScene" uid="uid://b6nk306h2a8qt" path="res://assets/basement/scene-assets/wall.glb" id="1_37gro"]
+[ext_resource type="Material" uid="uid://uembprhaw67q" path="res://assets/basement/texture/wall_basement.tres" id="2_ojkh3"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ojkh3"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="wall" parent="." instance=ExtResource("1_37gro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7153878, -1.1920929e-07, -6.177972)
+
+[node name="Cube" parent="wall" index="0"]
+material_override = ExtResource("2_ojkh3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="wall/Cube" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall/Cube/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ojkh3")
+
+[editable path="wall"]
