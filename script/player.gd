@@ -108,10 +108,11 @@ func _physics_process(delta: float) -> void:
 			var found := false
 
 			while node:
-				if node.has_method("start_drag"):
+				if node.is_in_group("doors"):
 					found = true
 					break
 				node = node.get_parent()
+
 
 			reticle.set_interactable(found)
 		else:
@@ -145,22 +146,21 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func try_begin_interaction():
-	
-	if ray.is_colliding():
-		var hit = ray.get_collider()
-		# Look for the physics body's parent or the node itself
-		var node = hit
-		# 🔥 HARD FILTER
-		if hit is Control or hit.is_in_group("pickup"):
+	if input_locked:
+		return
+
+	if not ray.is_colliding():
+		return
+
+	var hit = ray.get_collider()
+	var node = hit
+
+	while node:
+		if node.is_in_group("doors"):
+			current_interactable = node
+			node.start_drag(self)
 			return
-		else:
-			while node:
-				if node.has_method("start_drag"):
-				
-					current_interactable = node
-					current_interactable.start_drag(self)
-					return
-				node = node.get_parent()
+		node = node.get_parent()
 
 func end_interaction():
 	if current_interactable:
