@@ -1,9 +1,13 @@
 extends Node
 
-var items := []
+var items := [] # each item = {id, preview, desc}
 
-func add_item(item_name:String):
-	items.append(item_name)
+func add_item(item:Node3D):
+	items.append({
+		"id": item.item_id,
+		"desc": item.item_des,
+		"preview": item.preview_scene
+	})
 	print("Inventory:", items)
 
 func has_item(item_name:String) -> bool:

@@ -1,39 +1,239 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxqimqv1ci5oe"]
+[gd_scene format=3 uid="uid://dxqimqv1ci5oe"]
 
 [ext_resource type="Script" uid="uid://cp3g0hajdo2m5" path="res://system/inspector/inspection_scene.gd" id="1_34om0"]
+[ext_resource type="Shader" uid="uid://bpivobv61a5xn" path="res://system/inspector/inspection_scene.gdshader" id="2_kvd1r"]
+[ext_resource type="FontFile" uid="uid://clu2kqmo8wrf5" path="res://fonts/content-font.ttf" id="3_noydk"]
+[ext_resource type="FontFile" uid="uid://b4v57mlbbqwus" path="res://fonts/title.ttf" id="4_spkvl"]
 
-[node name="InspectionScene" type="CanvasLayer"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spkvl"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.09985284, 0.09985284, 0.09985284, 0.006)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3aqt"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i2ydp"]
+shader = ExtResource("2_kvd1r")
+shader_parameter/strength = 0.30000001425
+
+[node name="InspectionScene" type="CanvasLayer" unique_id=589924002]
 script = ExtResource("1_34om0")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.99744076, 0.04070203, -0.058781195, 0, 0.82214403, 0.56927955, 0.07149744, -0.56782264, 0.82004, 0, 0, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=584340518]
+transform = Transform3D(0.9974408, 0.040702034, -0.058781195, 0, 0.82214403, 0.56927955, 0.07149745, -0.56782264, 0.82004, 0, 1.5781727, 0.31885785)
+light_color = Color(1, 0.9411765, 0.8627451, 1)
+light_energy = 4.0
 shadow_enabled = true
 
-[node name="DarkOverlay" type="ColorRect" parent="."]
-offset_right = 1138.0
-offset_bottom = 661.0
-color = Color(0, 0, 0, 1)
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-anchors_preset = -1
-anchor_right = 0.98200005
+[node name="Control" type="Control" parent="." unique_id=1241049518]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = -3.0
-offset_right = 151.73596
-offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control" unique_id=1097898817]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer" unique_id=644660470]
+transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1140, 652)
+size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="InspectionWorld" type="Node3D" parent="SubViewportContainer/SubViewport"]
+[node name="InspectionWorld" type="Node3D" parent="Control/SubViewportContainer/SubViewport" unique_id=16553713]
 
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/InspectionWorld"]
+[node name="Camera3D" type="Camera3D" parent="Control/SubViewportContainer/SubViewport/InspectionWorld" unique_id=1309176367]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2624208)
 current = true
 fov = 45.0
 
-[node name="ItemHolder" type="Node3D" parent="SubViewportContainer/SubViewport/InspectionWorld"]
-transform = Transform3D(71.70229, 0, 0, 0, 79.88845, 0, 0, 0, 1, 0, 0, -1.7611177)
+[node name="ItemHolder" type="Node3D" parent="Control/SubViewportContainer/SubViewport/InspectionWorld" unique_id=2031284458]
+transform = Transform3D(51.759586, 0, 0, 0, 60.760674, 0, 0, 0, 1, -5.4955482e-05, 0.13213325, -1.0684856)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Control/SubViewportContainer/SubViewport/InspectionWorld" unique_id=227594593]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65971184, -1.6467938)
+light_color = Color(0.78431374, 0.8627451, 1, 1)
+light_energy = 5.0
+shadow_enabled = true
+omni_range = 3.115
+
+[node name="Control" type="Control" parent="Control" unique_id=1908977616]
+layout_mode = 1
+anchor_left = -0.0017361111
+anchor_top = -0.0046296297
+anchor_right = 1.0043403
+anchor_bottom = 1.0092592
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="GuidePanel" type="Panel" parent="Control/Control" unique_id=1360144563]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -59.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_spkvl")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Control/GuidePanel" unique_id=213554860]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.20550129
+anchor_top = 0.18499975
+anchor_right = 0.48850137
+anchor_bottom = 0.9259999
+offset_left = -0.1760006
+offset_top = 0.010002136
+offset_right = -0.0920105
+offset_bottom = -0.0040016174
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 21
+bbcode_enabled = true
+text = "[img=32x32]res://icons/mouse_move.png[/img] Rotate"
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Control/Control/GuidePanel" unique_id=900593734]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4616704
+anchor_top = 0.18499978
+anchor_right = 0.7448917
+anchor_bottom = 0.9259999
+offset_left = -0.07600403
+offset_top = 0.010002136
+offset_right = -0.0920105
+offset_bottom = -0.0040016174
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.76862746, 0.5411765, 0.22745098, 1)
+theme_override_font_sizes/normal_font_size = 21
+bbcode_enabled = true
+text = "[img=32x32]res://icons/mouse_scroll.png[/img] Grab"
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Control/Control/GuidePanel" unique_id=543013024]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6798965
+anchor_top = 0.20370375
+anchor_right = 0.9630823
+anchor_bottom = 0.9444444
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 21
+bbcode_enabled = true
+text = "[img=32x32]res://icons/mouse_right.png[/img] Cancel"
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="Control/Control" unique_id=621593447]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="description&name" type="Control" parent="Control/Control/Control" unique_id=2061301536]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="panel-object-guide" type="Panel" parent="Control/Control/Control/description&name" unique_id=1878799827]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.27351165
+anchor_top = 0.6057839
+anchor_right = 0.6721311
+anchor_bottom = 0.847793
+offset_right = 6.1035156e-05
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l3aqt")
+metadata/_edit_use_anchors_ = true
+
+[node name="description" type="RichTextLabel" parent="Control/Control/Control/description&name/panel-object-guide" unique_id=902854764]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.054112554
+anchor_top = 0.7735849
+anchor_right = 1.0541124
+anchor_bottom = 1.2389935
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.72135246, 0.69789743, 0.6507289, 0.70000005)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 0.70000005)
+theme_override_fonts/normal_font = ExtResource("3_noydk")
+theme_override_font_sizes/normal_font_size = 20
+text = "It look like a mattle key with lot of junk , i think it 5 to 10 years older!"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="name" type="RichTextLabel" parent="Control/Control/Control/description&name/panel-object-guide" unique_id=1917909652]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.17532468
+anchor_top = 0.35220125
+anchor_right = 0.90909094
+anchor_bottom = 0.836478
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.9019608, 0.8862745, 0.84705883, 1)
+theme_override_fonts/normal_font = ExtResource("4_spkvl")
+theme_override_font_sizes/normal_font_size = 27
+text = "Rusty Key"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="darkCorner" type="ColorRect" parent="Control/Control" unique_id=1739600471]
+material = SubResource("ShaderMaterial_i2ydp")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

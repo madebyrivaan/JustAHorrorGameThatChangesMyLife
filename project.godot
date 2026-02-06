@@ -76,7 +76,7 @@ doors=""
 reticle=""
 pickup=""
 inventory_ui=""
-world_env=""
+interior=""
 
 [input]
 

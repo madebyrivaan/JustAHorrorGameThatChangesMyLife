@@ -166,5 +166,6 @@ func end_interaction():
 	if current_interactable:
 		current_interactable.end_drag()
 		current_interactable = null
+		
 func set_input_locked(value: bool) -> void:
 	input_locked = value

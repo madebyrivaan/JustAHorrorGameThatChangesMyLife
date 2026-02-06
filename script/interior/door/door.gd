@@ -4,6 +4,8 @@ extends Node3D
 @export_group("Settings")
 @export var min_angle : float = 0.0
 @export var max_angle : float = 90.0
+## Door Locking System
+@export var door_lock : bool = false;
 ## How heavy the door feels. Lower = Heavier lag.
 @export var weight : float = 5.0 
 ## How much force to slam the door shut/open?
@@ -25,6 +27,7 @@ extends Node3D
 var release_time := 0.0
 # --- INTERNAL VARIABLES ---
 @onready var hinge: Node3D = $Hinge
+@onready var Lock_sprite: Sprite3D = $Sprite3D
 
 var current_angle : float = 0.0
 var target_angle : float = 0.0
@@ -37,6 +40,9 @@ func _ready() -> void:
 	target_angle = current_angle
 
 func start_drag(player_node):
+	if door_lock:
+		Lock_sprite.visible = false;
+		return;
 	is_being_dragged = true
 	# Start playing audio silently, we will modulate volume based on speed
 	if !audio_player.playing:
@@ -50,6 +56,8 @@ func end_drag():
 
 # Called by the Player script when mouse moves
 func handle_drag(mouse_delta : Vector2):
+	if door_lock:
+		return;
 	# We use X axis mouse movement. 
 	# If you want dragging UP/DOWN to open the door, use mouse_delta.y
 	# We multiply by sensitivity (ex: 200) to convert tiny mouse pixels to degrees
@@ -61,6 +69,8 @@ func handle_drag(mouse_delta : Vector2):
 	target_angle = clamp(target_angle, min_angle, max_angle)
 
 func _physics_process(delta: float) -> void:
+	if door_lock:
+		return;
 	# 1. PHYSICS INTERPOLATION (The AAA Feel)
 	# Instead of setting rotation directly, we move "current" towards "target"
 	# This creates that slight delay/weight feel.
