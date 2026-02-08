@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cd7fkg57v7tta"]
+
+[ext_resource type="Shader" uid="uid://dxprgpjcuexie" path="res://texture/shader/roof.gdshader" id="1_o8206"]
+[ext_resource type="Texture2D" uid="uid://cy03lcu522kbn" path="res://assets/interior/texture&shader/texture(img)/wall_w2_interior-wall-with-stained-areas.jpg" id="2_y53yk"]
+[ext_resource type="Texture2D" uid="uid://c15633ox81ndc" path="res://assets/interior/texture&shader/texture(img)/concrete_layers_02_rough_2k.exr" id="3_p5wcu"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_o8206")
+shader_parameter/albedo_tex = ExtResource("2_y53yk")
+shader_parameter/roughness_tex = ExtResource("3_p5wcu")
+shader_parameter/uv_scale = 4.0
+shader_parameter/roughness_strength = 1.0
+shader_parameter/normal_strength = 0.25
+shader_parameter/height_contrast = 1.5

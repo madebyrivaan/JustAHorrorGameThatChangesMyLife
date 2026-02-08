@@ -31,11 +31,13 @@ var current_pickup : Node = null
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	mouse_captured = true
-
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if input_locked:
 		return
+	if mouse_captured and event.is_action_pressed("ui_cancel"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if event.is_action_pressed("interact") and current_pickup:
 		if current_pickup.has_method("interact"):
 			current_pickup.interact(self)

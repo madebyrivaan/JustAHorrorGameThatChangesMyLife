@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgtl1e4tcbwgi"
+uid="uid://diabak0bnbpe0"
 path.s3tc="res://.godot/imported/floor_dark_brown-wooden-planks-textured-background.jpg-4b81d49f5bc3f3a116aa1b9b4e4f5c2d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "246f5341f4f989a4b87fbd42ba1f92db"
 }
 
 [deps]

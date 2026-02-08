@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b071w8iup6ft3"]
+
+[ext_resource type="Shader" uid="uid://3ruysc624cfu" path="res://texture/shader/wall-cheap.gdshader" id="1_s66e7"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s66e7"]
+frequency = 0.5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5al7p"]
+noise = SubResource("FastNoiseLite_s66e7")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_s66e7")
+shader_parameter/base_color = Color(0.4, 0.42, 0.38, 1)
+shader_parameter/grime_color = Color(0.32251212, 0.38066307, 0.33627298, 1)
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_5al7p")
+shader_parameter/uv_scale = 4.0
+shader_parameter/roughness = 0.47600002261
+shader_parameter/normal_strength = 2.84500013187762
+shader_parameter/contrast = 3.0
