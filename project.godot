@@ -77,6 +77,7 @@ reticle=""
 pickup=""
 inventory_ui=""
 interior=""
+StartRoom=""
 
 [input]
 

@@ -1,5 +1,6 @@
 extends Node3D
 
+signal door_state_changed(door, state)
 # --- CONFIGURATION ---
 @export_group("Settings")
 @export var min_angle : float = 0.0
@@ -10,6 +11,8 @@ extends Node3D
 @export var weight : float = 5.0 
 ## How much force to slam the door shut/open?
 @export var inertia_dampening : float = 2.0 
+## WHICH ROOM TO DISABLE/ENABLE?
+@export var holder_room = "StartRoom"
 
 @export_group("Audio")
 @onready var audio_player: AudioStreamPlayer3D = $SFX_Open
@@ -27,12 +30,21 @@ extends Node3D
 var release_time := 0.0
 # --- INTERNAL VARIABLES ---
 @onready var hinge: Node3D = $Hinge
-@onready var Lock_sprite: Sprite3D = $Sprite3D
 
 var current_angle : float = 0.0
 var target_angle : float = 0.0
 var door_velocity : float = 0.0
 var is_being_dragged : bool = false
+#state
+
+enum DoorState {
+	CLOSED,
+	OPENING,
+	OPEN,
+	CLOSING
+}
+
+var door_state := DoorState.CLOSED
 
 func _ready() -> void:
 	# Initialize rotation
@@ -40,10 +52,10 @@ func _ready() -> void:
 	target_angle = current_angle
 
 func start_drag(player_node):
-	if door_lock:
-		Lock_sprite.visible = false;
-		return;
 	is_being_dragged = true
+	if door_state == DoorState.CLOSED:
+		door_state = DoorState.OPENING
+		emit_signal("door_state_changed", holder_room, door_state)
 	# Start playing audio silently, we will modulate volume based on speed
 	if !audio_player.playing:
 		audio_player.play()
@@ -94,13 +106,24 @@ func _physics_process(delta: float) -> void:
 	if !is_being_dragged:
 		var now := Time.get_ticks_msec() / 1000.0
 		var elapsed := now - release_time
+		if door_state == DoorState.OPEN and !is_being_dragged:
+			door_state = DoorState.CLOSING
+			emit_signal("door_state_changed", holder_room, door_state)
+
 		var force := slow_close_force
 		if elapsed > fast_close_delay:
 			force = fast_close_force
 		target_angle = move_toward(target_angle, min_angle, force * delta)
+		if door_state == DoorState.CLOSING and abs(current_angle - min_angle) < 1.0:
+			door_state = DoorState.CLOSED
+			emit_signal("door_state_changed", holder_room, door_state)
 
 		
 	# 3. DYNAMIC AUDIO
+	if door_state == DoorState.OPENING and abs(current_angle - max_angle) < 1.0:
+		door_state = DoorState.OPEN
+		emit_signal("door_state_changed", holder_room, door_state)
+
 	process_audio(velocity_frame)
 
 func process_audio(velocity : float):
