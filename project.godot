@@ -52,6 +52,7 @@ buses/default_bus_layout=""
 SimpleGrass="*res://addons/simplegrasstextured/singleton.tscn"
 Inventory="*uid://dw84b07dehwjc"
 InspectionManager="*uid://d1l726lt5m7j5"
+DoorManager="*res://system/door_stream_manager.gd"
 
 [editor_plugins]
 

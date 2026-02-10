@@ -1,36 +1,27 @@
 extends Node
 
-# door → rooms mapping
-@export var door_map := {
-	# door_node : { "enable": [], "disable": [] }
-}
+@export var disable_delay := 2.0
 
-func GetRoomGroup(name:String):
-	var room = get_tree().get_first_node_in_group(name)
-	return room
-	
-func register_door(door):
-	door.door_state_changed.connect(_on_door_state)
+var current_room : Node3D
+var active_rooms := {}
 
-func _on_door_state(door, state):
-	if !door_map.has(door):
+func player_entered(room: Node3D):
+	current_room = room
+	activate_room(room)
+
+func player_exited(room: Node3D):
+	await get_tree().create_timer(disable_delay).timeout
+	if current_room != room:
+		deactivate_room(room)
+
+func activate_room(room):
+	if active_rooms.has(room):
 		return
+	room.enable_room()
+	active_rooms[room] = true
 
-	var data = door_map[door]
-
-	match state:
-		door.DoorState.OPENING:
-			for r in data.enable:
-				_enable_room(r)
-
-		door.DoorState.CLOSING:
-			for r in data.disable:
-				_disable_room(r)
-
-func _enable_room(room: Node3D):
-	room.visible = true
-	room.process_mode = Node.PROCESS_MODE_INHERIT
-
-func _disable_room(room: Node3D):
-	room.visible = false
-	room.process_mode = Node.PROCESS_MODE_DISABLED
+func deactivate_room(room):
+	if room == current_room:
+		return
+	room.disable_room()
+	active_rooms.erase(room)

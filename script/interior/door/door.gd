@@ -1,6 +1,5 @@
 extends Node3D
 
-signal door_state_changed(door, state)
 # --- CONFIGURATION ---
 @export_group("Settings")
 @export var min_angle : float = 0.0
@@ -12,7 +11,12 @@ signal door_state_changed(door, state)
 ## How much force to slam the door shut/open?
 @export var inertia_dampening : float = 2.0 
 ## WHICH ROOM TO DISABLE/ENABLE?
-@export var holder_room = "StartRoom"
+@export var holder_room: NodePath
+var room_node: Node = null
+@export var open_angle := 5.0
+@export var close_angle := 1.0
+
+
 
 @export_group("Audio")
 @onready var audio_player: AudioStreamPlayer3D = $SFX_Open
@@ -28,6 +32,8 @@ signal door_state_changed(door, state)
 @export var fast_close_delay := 3.0
 
 var release_time := 0.0
+
+
 # --- INTERNAL VARIABLES ---
 @onready var hinge: Node3D = $Hinge
 
@@ -36,26 +42,24 @@ var target_angle : float = 0.0
 var door_velocity : float = 0.0
 var is_being_dragged : bool = false
 #state
-
-enum DoorState {
-	CLOSED,
-	OPENING,
-	OPEN,
-	CLOSING
-}
-
-var door_state := DoorState.CLOSED
+var is_door_open : bool
 
 func _ready() -> void:
 	# Initialize rotation
+	if holder_room != NodePath("") and has_node(holder_room):
+		room_node = get_node(holder_room)
 	current_angle = hinge.rotation_degrees.y
 	target_angle = current_angle
+	
+	# 🔑 INITIAL DOOR STATE SYNC
+	is_door_open = current_angle > open_angle
+
+	if room_node:
+		room_node.door_open = is_door_open
+		room_node.evaluate_state()
 
 func start_drag(player_node):
 	is_being_dragged = true
-	if door_state == DoorState.CLOSED:
-		door_state = DoorState.OPENING
-		emit_signal("door_state_changed", holder_room, door_state)
 	# Start playing audio silently, we will modulate volume based on speed
 	if !audio_player.playing:
 		audio_player.play()
@@ -86,6 +90,7 @@ func _physics_process(delta: float) -> void:
 	# 1. PHYSICS INTERPOLATION (The AAA Feel)
 	# Instead of setting rotation directly, we move "current" towards "target"
 	# This creates that slight delay/weight feel.
+
 	
 	var smooth_speed = weight * delta
 	
@@ -98,32 +103,38 @@ func _physics_process(delta: float) -> void:
 	
 	# Apply rotation to the Hinge (Assuming Y axis is up)
 	hinge.rotation_degrees.z = current_angle
-
 	
-	# 2. MOMENTUM (Optional Polish)
-	# If released, the target angle stays where it is, 
-	# effectively stopping the door with friction.
+	# DOOR OPENS
+	if is_door_open == false and current_angle > open_angle:
+		is_door_open = true
+		print("DOOR STATE: OPEN")
+
+		if room_node:
+			room_node.door_open = true
+			room_node.evaluate_state()
+
+
+	# DOOR CLOSES
+	if is_door_open == true and current_angle < close_angle:
+		is_door_open = false
+		print("DOOR STATE: CLOSED")
+
+		if room_node:
+			print("IN-Room-Node-closed")
+			room_node.door_open = false
+			print("room_node_closed",room_node.door_open)
+			room_node.evaluate_state()
+
+
 	if !is_being_dragged:
 		var now := Time.get_ticks_msec() / 1000.0
 		var elapsed := now - release_time
-		if door_state == DoorState.OPEN and !is_being_dragged:
-			door_state = DoorState.CLOSING
-			emit_signal("door_state_changed", holder_room, door_state)
-
 		var force := slow_close_force
 		if elapsed > fast_close_delay:
 			force = fast_close_force
-		target_angle = move_toward(target_angle, min_angle, force * delta)
-		if door_state == DoorState.CLOSING and abs(current_angle - min_angle) < 1.0:
-			door_state = DoorState.CLOSED
-			emit_signal("door_state_changed", holder_room, door_state)
+		target_angle = move_toward(target_angle, min_angle, force * delta)	
 
-		
 	# 3. DYNAMIC AUDIO
-	if door_state == DoorState.OPENING and abs(current_angle - max_angle) < 1.0:
-		door_state = DoorState.OPEN
-		emit_signal("door_state_changed", holder_room, door_state)
-
 	process_audio(velocity_frame)
 
 func process_audio(velocity : float):
