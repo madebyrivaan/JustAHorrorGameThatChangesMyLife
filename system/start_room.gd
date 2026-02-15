@@ -37,6 +37,7 @@ func enable_room():
 	content.visible = true
 	content.set_physics_process(true)
 	content.set_process(true)
+	content.process_mode = Node.PROCESS_MODE_ALWAYS
 	for child in content.get_children():
 		if child is CollisionShape3D:
 			child.disabled = false
@@ -52,6 +53,8 @@ func disable_room():
 	content.visible = false
 	content.set_physics_process(false)
 	content.set_process(false)
+	content.process_mode = Node.PROCESS_MODE_DISABLED
+
 	for child in content.get_children():
 		if child is CollisionShape3D:
 			child.disabled = true

@@ -15,7 +15,9 @@ extends Node3D
 var room_node: Node = null
 @export var open_angle := 5.0
 @export var close_angle := 1.0
-
+## Item Key If door is locked
+@export var required_item_id: String = "Rusty key"
+@export var unlock_sound: AudioStreamPlayer3D
 
 
 @export_group("Audio")
@@ -155,3 +157,24 @@ func process_audio(velocity : float):
 # Utility for math conversion
 func linear_to_db(lin):
 	return 20.0 * log(max(lin, 0.0001)) / log(10.0)
+
+
+func try_use_item(item_data: Dictionary) -> bool:
+	if item_data.is_empty():
+		print("❌ No item selected")
+		return false
+	
+	print("Trying to use:", item_data["id"], "on door")
+	
+	if item_data["id"] == required_item_id:
+		door_lock = false
+		if unlock_sound:
+			print("sound played")
+			unlock_sound.play()
+			
+		target_angle = clamp(current_angle + 13, min_angle, max_angle)
+		print("✅ Door Unlocked")
+		return true
+	else:
+		print("❌ Wrong item for this door")
+		return false

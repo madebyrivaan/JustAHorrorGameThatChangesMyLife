@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dxqimqv1ci5oe"]
+[gd_scene load_steps=8 format=3 uid="uid://dxqimqv1ci5oe"]
 
 [ext_resource type="Script" uid="uid://cp3g0hajdo2m5" path="res://system/inspector/inspection_scene.gd" id="1_34om0"]
 [ext_resource type="Shader" uid="uid://bpivobv61a5xn" path="res://system/inspector/inspection_scene.gdshader" id="2_kvd1r"]
@@ -33,16 +33,16 @@ corner_detail = 5
 shader = ExtResource("2_kvd1r")
 shader_parameter/strength = 0.30000001425
 
-[node name="InspectionScene" type="CanvasLayer" unique_id=589924002]
+[node name="InspectionScene" type="CanvasLayer"]
 script = ExtResource("1_34om0")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=584340518]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.9974408, 0.040702034, -0.058781195, 0, 0.82214403, 0.56927955, 0.07149745, -0.56782264, 0.82004, 0, 1.5781727, 0.31885785)
 light_color = Color(1, 0.9411765, 0.8627451, 1)
 light_energy = 4.0
 shadow_enabled = true
 
-[node name="Control" type="Control" parent="." unique_id=1241049518]
+[node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,7 +51,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Control" unique_id=1097898817]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,30 +61,30 @@ grow_vertical = 2
 mouse_filter = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer" unique_id=644660470]
+[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="InspectionWorld" type="Node3D" parent="Control/SubViewportContainer/SubViewport" unique_id=16553713]
+[node name="InspectionWorld" type="Node3D" parent="Control/SubViewportContainer/SubViewport"]
 
-[node name="Camera3D" type="Camera3D" parent="Control/SubViewportContainer/SubViewport/InspectionWorld" unique_id=1309176367]
+[node name="Camera3D" type="Camera3D" parent="Control/SubViewportContainer/SubViewport/InspectionWorld"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2624208)
 current = true
 fov = 45.0
 
-[node name="ItemHolder" type="Node3D" parent="Control/SubViewportContainer/SubViewport/InspectionWorld" unique_id=2031284458]
+[node name="ItemHolder" type="Node3D" parent="Control/SubViewportContainer/SubViewport/InspectionWorld"]
 transform = Transform3D(51.759586, 0, 0, 0, 60.760674, 0, 0, 0, 1, -5.4955482e-05, 0.13213325, -1.0684856)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Control/SubViewportContainer/SubViewport/InspectionWorld" unique_id=227594593]
+[node name="OmniLight3D" type="OmniLight3D" parent="Control/SubViewportContainer/SubViewport/InspectionWorld"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65971184, -1.6467938)
 light_color = Color(0.78431374, 0.8627451, 1, 1)
 light_energy = 5.0
 shadow_enabled = true
 omni_range = 3.115
 
-[node name="Control" type="Control" parent="Control" unique_id=1908977616]
+[node name="Control" type="Control" parent="Control"]
 layout_mode = 1
 anchor_left = -0.0017361111
 anchor_top = -0.0046296297
@@ -95,7 +95,7 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="GuidePanel" type="Panel" parent="Control/Control" unique_id=1360144563]
+[node name="GuidePanel" type="Panel" parent="Control/Control"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -108,7 +108,7 @@ grow_vertical = 0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_spkvl")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/Control/GuidePanel" unique_id=213554860]
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Control/GuidePanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.20550129
@@ -125,7 +125,7 @@ bbcode_enabled = true
 text = "[img=32x32]res://icons/mouse_move.png[/img] Rotate"
 metadata/_edit_use_anchors_ = true
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Control/Control/GuidePanel" unique_id=900593734]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Control/Control/GuidePanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4616704
@@ -143,7 +143,7 @@ bbcode_enabled = true
 text = "[img=32x32]res://icons/mouse_scroll.png[/img] Grab"
 metadata/_edit_use_anchors_ = true
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="Control/Control/GuidePanel" unique_id=543013024]
+[node name="RichTextLabel3" type="RichTextLabel" parent="Control/Control/GuidePanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.6798965
@@ -156,7 +156,7 @@ bbcode_enabled = true
 text = "[img=32x32]res://icons/mouse_right.png[/img] Cancel"
 metadata/_edit_use_anchors_ = true
 
-[node name="Control" type="Control" parent="Control/Control" unique_id=621593447]
+[node name="Control" type="Control" parent="Control/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -166,7 +166,7 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="description&name" type="Control" parent="Control/Control/Control" unique_id=2061301536]
+[node name="description&name" type="Control" parent="Control/Control/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -176,7 +176,7 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="panel-object-guide" type="Panel" parent="Control/Control/Control/description&name" unique_id=1878799827]
+[node name="panel-object-guide" type="Panel" parent="Control/Control/Control/description&name"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.27351165
@@ -190,7 +190,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_l3aqt")
 metadata/_edit_use_anchors_ = true
 
-[node name="description" type="RichTextLabel" parent="Control/Control/Control/description&name/panel-object-guide" unique_id=902854764]
+[node name="description" type="RichTextLabel" parent="Control/Control/Control/description&name/panel-object-guide"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.054112554
@@ -209,7 +209,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="name" type="RichTextLabel" parent="Control/Control/Control/description&name/panel-object-guide" unique_id=1917909652]
+[node name="name" type="RichTextLabel" parent="Control/Control/Control/description&name/panel-object-guide"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.17532468
@@ -227,7 +227,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="darkCorner" type="ColorRect" parent="Control/Control" unique_id=1739600471]
+[node name="darkCorner" type="ColorRect" parent="Control/Control"]
 material = SubResource("ShaderMaterial_i2ydp")
 layout_mode = 1
 anchors_preset = 15

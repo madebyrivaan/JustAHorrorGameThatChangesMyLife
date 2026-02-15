@@ -25,9 +25,19 @@ func start_inspection(item:Node3D, preview_scene:PackedScene):
 
 
 func pickup():
-	Inventory.add_item(original_item)
+	if original_item == null:
+		return
+		
+	var data = {
+		"id": original_item.item_id,
+		"description": original_item.item_des,
+		"preview_scene": original_item.preview_scene
+	}
+	
+	Inventory.add_item(data)
 	original_item.on_picked()
 	close()
+
 
 func cancel():
 	close()

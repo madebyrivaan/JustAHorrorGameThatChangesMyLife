@@ -13,6 +13,7 @@ extends CharacterBody3D
 
 @export_group("Interaction")
 @export var interaction_range : float = 2.5
+var locked_target : Node = null
 
 # --- NODES ---
 @onready var head: Node3D = $Head
@@ -21,6 +22,7 @@ extends CharacterBody3D
 @onready var reticle = get_tree().get_first_node_in_group("reticle")
 @onready var interact_text: RichTextLabel = $"HUD/interact-text"
 var input_locked := false
+var new_text := ""
 
 # --- STATE ---
 var mouse_captured : bool = false
@@ -38,11 +40,21 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if mouse_captured and event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 	if event.is_action_pressed("interact") and current_pickup:
 		if current_pickup.has_method("interact"):
 			current_pickup.interact(self)
 		current_pickup = null
+		
+	if event.is_action_pressed("camera_key"):
+		head.set_camera_state(true)
 
+	if event.is_action_released("camera_key"):
+		head.set_camera_state(false)
+
+		
+	if Input.is_action_pressed("camera_key") and Input.is_action_just_pressed("camera_click"):
+		head.flash()
 		
 	if event is InputEventMouseButton:
 		# Capture mouse if we clicked back into window
@@ -71,18 +83,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			head.rotate_x(-event.relative.y * mouse_sensitivity)
 			
 			head.rotation.x = clamp(head.rotation.x, deg_to_rad(-80), deg_to_rad(80))
-func item_interact(obj:Node) -> void:
-	var node := obj
 
-	while node:
-		if node.has_method("interact"):
-			interact_text.text = "Press E To Pick Up"
-			current_pickup = node
-			return
-
-		node = node.get_parent()
-
-	current_pickup = null
 
 			
 func _physics_process(delta: float) -> void:
@@ -93,15 +94,34 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 
-	interact_text.text = ""
-	if input_locked:
-		velocity = Vector3.ZERO
-		move_and_slide()
-		return
+	new_text = ""
+	current_pickup = null
+	
 	if ray.is_colliding():
 		var hit = ray.get_collider()
+		var node = hit
 
-		item_interact(hit)
+		while node:
+			# PICKUP
+			if node.has_method("interact"):
+				new_text = "Press E To Pick Up"
+				current_pickup = node
+				break
+
+			# DOOR
+			if node.is_in_group("doors"):
+				if node.door_lock:
+					new_text = "It's locked , Press Tab To use items"
+					locked_target = node
+				else:
+					new_text = "Hold Mouse To Open"
+					locked_target = null
+				break
+
+			node = node.get_parent()
+
+	interact_text.text = new_text
+	
 	# --- RETICLE INTERACTION CHECK ---
 	if reticle:
 		if ray.is_colliding():
@@ -159,9 +179,9 @@ func try_begin_interaction():
 
 	while node:
 		if node.is_in_group("doors"):
-			current_interactable = node
-			node.start_drag(self)
-			return
+				current_interactable = node
+				node.start_drag(self)
+				return
 		node = node.get_parent()
 
 func end_interaction():

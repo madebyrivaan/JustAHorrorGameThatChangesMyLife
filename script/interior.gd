@@ -9,6 +9,18 @@ func _ready():
 	spawn_player()
 	
 
+func _unhandled_input(event):
+
+	if Input.is_action_just_pressed("ui_page_up"):
+		var d = get_tree().get_first_node_in_group("doors")
+		if d:
+			print("Manual unlock test")
+			d.try_use_item({
+				"id": "Rusty key"
+			})
+
+
+
 func spawn_player():
 	var player = get_tree().get_first_node_in_group("player")
 	if not player:

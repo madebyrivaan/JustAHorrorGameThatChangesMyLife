@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://uembprhaw67q"]
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://uembprhaw67q"]
 
 [ext_resource type="Shader" uid="uid://ci2r27n082aa5" path="res://assets/basement/texture/wall_basement.gdshader" id="1_qugjy"]
 [ext_resource type="Texture2D" uid="uid://c2354c2ewthdt" path="res://assets/basement/texture_image/textures-wall/concrete_floor_painted_diff_2k.jpg" id="2_m21rl"]

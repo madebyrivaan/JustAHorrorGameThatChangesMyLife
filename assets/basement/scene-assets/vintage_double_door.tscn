@@ -113,7 +113,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 2.646978e-23, 0, -2.646978e-23, 1, -0.977
 mesh = SubResource("ArrayMesh_uokac")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Hinge/Asylum Entrance - Left Door_AsylumEntranceDoors_MTL_0" groups=["doors"]]
+[node name="StaticBody3D" type="StaticBody3D" parent="Hinge/Asylum Entrance - Left Door_AsylumEntranceDoors_MTL_0"]
 collision_layer = 3
 collision_mask = 3
 
