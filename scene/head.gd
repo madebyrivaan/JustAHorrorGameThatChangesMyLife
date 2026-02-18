@@ -182,8 +182,7 @@ func flash():
 
 	var tex = ImageTexture.create_from_image(img)
 	screen_material.set_shader_parameter("screen_tex", tex)
-
-
+	trigger_photo_reaction()
 	
 	# PHASE 1 — Hard Shock (0.05 sec)
 	camera_light.light_energy = 20.0
@@ -241,3 +240,24 @@ func _boot_async(duration: float) -> void:
 		await get_tree().process_frame
 
 	screen_material.set_shader_parameter("boot_progress", 1.0)
+
+func trigger_photo_reaction():
+	var space_state = get_world_3d().direct_space_state
+	
+	var from = main_cam.global_transform.origin
+	var to = from + -main_cam.global_transform.basis.z * 5.0
+
+	var query = PhysicsRayQueryParameters3D.create(from, to)
+	var result = space_state.intersect_ray(query)
+
+	if result:
+		var collider = result.collider
+		print("Hit:", result.collider)
+		var node = collider
+
+		while node:
+			if node.has_method("on_photo_taken"):
+				print("Photo target found:", node)
+				node.on_photo_taken()
+				break
+			node = node.get_parent()

@@ -20,9 +20,10 @@ func add_item(data: Dictionary):
 	if data.is_empty():
 		push_error("❌ Tried to add empty item data")
 		return
-		
+	
 	items.append(data)
-	print("📦 Item Added:", data.get("id", "UNKNOWN"))
+	var item_ID = data.get("id")
+	print("📦 Item Added:", )
 	emit_signal("inventory_changed")
 
 
@@ -75,3 +76,9 @@ func remove_selected():
 	
 	if items.size() > 0:
 		emit_signal("selection_changed", get_selected())
+
+func has_item(id: String) -> bool:
+	for item in items:
+		if item.get("id") == id:
+			return true
+	return false

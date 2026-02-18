@@ -1,0 +1,20 @@
+[gd_resource type="StandardMaterial3D" load_steps=7 format=3 uid="uid://dsvs5jio34q5t"]
+
+[ext_resource type="Texture2D" uid="uid://cgqyyhg23csua" path="res://assets/interior/furniter/texture/Old_Cupboard1Κ_Base_color.jpg" id="1_feeef"]
+[ext_resource type="Texture2D" uid="uid://ct5yqu6sag8n5" path="res://assets/interior/furniter/texture/Old_Cupboard1Κ_Mixed_AO.jpg" id="2_jhct4"]
+[ext_resource type="Texture2D" uid="uid://yo0peuejqusi" path="res://assets/interior/furniter/texture/Old_Cupboard1Κ_Height.jpg" id="3_d5ewi"]
+[ext_resource type="Texture2D" uid="uid://cimqi8721t3hu" path="res://assets/interior/furniter/texture/Old_Cupboard1Κ_Metallic.jpg" id="4_cem1x"]
+[ext_resource type="Texture2D" uid="uid://djr3kglpgna3v" path="res://assets/interior/furniter/texture/Old_Cupboard1Κ_Normal.jpg" id="5_pmn5r"]
+[ext_resource type="Texture2D" uid="uid://5ifqo2msrfcn" path="res://assets/interior/furniter/texture/Old_Cupboard1Κ_Roughness.jpg" id="6_bcaxs"]
+
+[resource]
+albedo_texture = ExtResource("1_feeef")
+metallic = 1.0
+metallic_texture = ExtResource("4_cem1x")
+roughness_texture = ExtResource("6_bcaxs")
+normal_enabled = true
+normal_texture = ExtResource("5_pmn5r")
+ao_enabled = true
+ao_texture = ExtResource("2_jhct4")
+heightmap_enabled = true
+heightmap_texture = ExtResource("3_d5ewi")

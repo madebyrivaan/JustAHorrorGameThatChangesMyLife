@@ -18,6 +18,10 @@ var room_node: Node = null
 ## Item Key If door is locked
 @export var required_item_id: String = "Rusty key"
 @export var unlock_sound: AudioStreamPlayer3D
+#door type of unlock
+enum UnlockType { KEY, PHOTO, NONE }
+@export var unlock_type := UnlockType.KEY
+@export var sequence_event_name : String = "DOOR_PHOTO_HALLWAY"
 
 
 @export_group("Audio")
@@ -178,3 +182,19 @@ func try_use_item(item_data: Dictionary) -> bool:
 	else:
 		print("❌ Wrong item for this door")
 		return false
+
+func on_photo_taken():
+	if unlock_type != UnlockType.PHOTO:
+		return
+	
+	if !door_lock:
+		return
+
+
+	print("📸 Photo triggered door!")
+
+	GameManager.request_event(sequence_event_name, self)
+
+func force_open_fast():
+	door_lock = false
+	target_angle = clamp(current_angle + 40.0, min_angle, max_angle)

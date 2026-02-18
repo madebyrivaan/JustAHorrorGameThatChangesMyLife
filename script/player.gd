@@ -45,7 +45,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if current_pickup.has_method("interact"):
 			current_pickup.interact(self)
 		current_pickup = null
-		
+
+	#if Inventory.has_item("camera"):
 	if event.is_action_pressed("camera_key"):
 		head.set_camera_state(true)
 

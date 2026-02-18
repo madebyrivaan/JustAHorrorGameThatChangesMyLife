@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1fcc2yxxfgag"]
+
+[ext_resource type="Script" uid="uid://ebko2qjq82do" path="res://system/keypad_ui.gd" id="1_2wjff"]
+
+[node name="Control" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2wjff")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.23524305
+anchor_top = 0.47608024
+anchor_right = 0.7829861
+anchor_bottom = 0.52391976
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Enter code"
+metadata/_edit_use_anchors_ = true

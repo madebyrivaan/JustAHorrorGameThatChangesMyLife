@@ -75,7 +75,9 @@ current = true
 fov = 45.0
 
 [node name="ItemHolder" type="Node3D" parent="Control/SubViewportContainer/SubViewport/InspectionWorld"]
-transform = Transform3D(51.759586, 0, 0, 0, 60.760674, 0, 0, 0, 1, -5.4955482e-05, 0.13213325, -1.0684856)
+transform = Transform3D(57.963406, 0, 0, 0, 63.781517, 0, 0, 0, 32.205673, -5.4955482e-05, 0.13213325, -17.468853)
+
+[node name="pivot" type="Node3D" parent="Control/SubViewportContainer/SubViewport/InspectionWorld/ItemHolder"]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Control/SubViewportContainer/SubViewport/InspectionWorld"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65971184, -1.6467938)

@@ -8,14 +8,18 @@ var idle_timer := 0.0
 
 @onready var name_text: RichTextLabel = $"Control/Control/Control/description&name/panel-object-guide/name"
 @onready var description_text: RichTextLabel = $"Control/Control/Control/description&name/panel-object-guide/description"
+@onready var pivot: Node3D = $Control/SubViewportContainer/SubViewport/InspectionWorld/ItemHolder/pivot
 
 func CreateContent(item:Node3D):
 	name_text.text = item.item_id;
 	description_text.text = item.item_des;
 	
 func spawn_preview(preview_scene: PackedScene , item : Node3D):
-	for c in item_holder.get_children():
+	for c in pivot.get_children():
 		c.queue_free()
+	pivot.rotation = Vector3.ZERO
+	pivot.position = Vector3.ZERO
+
 	if preview_scene == null:
 		push_error("❌ preview_scene is NULL. Assign it in item Inspector.")
 		return
@@ -25,16 +29,41 @@ func spawn_preview(preview_scene: PackedScene , item : Node3D):
 	CreateContent(item)
 	
 	var preview = preview_scene.instantiate()
-	item_holder.add_child(preview)
+	pivot.add_child(preview)
+
 	
 	# 🔥 RESET EVERYTHING
+	# Reset transform
 	preview.transform = Transform3D.IDENTITY
-	preview.rotation = Vector3.ZERO   # ⭐ MOST IMPORTANT
 
-	# Optional scale
-	preview.scale = Vector3.ONE * 0.15
-	# Reset transform for clean cinematic look
-	preview.transform = Transform3D.IDENTITY
+	var mesh_instance : MeshInstance3D = null
+
+	for child in preview.get_children():
+		if child is MeshInstance3D:
+			mesh_instance = child
+			break
+
+# If not found directly, search deeper
+	if mesh_instance == null:
+		mesh_instance = preview.find_child("", true, false) as MeshInstance3D
+
+	if mesh_instance == null:
+		push_error("❌ No MeshInstance3D found in preview scene.")
+		return
+	# Get mesh bounds
+	var aabb = mesh_instance.get_aabb()
+	var size = aabb.size
+	var max_dim = max(size.x, size.y, size.z)
+
+# Auto scale to fit nicely
+	if max_dim > 0:
+		var target_size = 1.5  # adjust if needed
+		var scale_factor = target_size / max_dim
+		preview.scale = Vector3.ONE * scale_factor
+
+# Center the model inside pivot
+	preview.position = -(aabb.position + size * 0.5)
+
 
 func _unhandled_input(event):
 	if !InspectionManager.inspecting:
@@ -53,8 +82,8 @@ func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		manual_active = true
 		idle_timer = 0.0
-		item_holder.rotate_y(-event.relative.x * 0.01)
-		item_holder.rotate_x(-event.relative.y * 0.01)
+		pivot.rotate_y(-event.relative.x * 0.01)
+		pivot.rotate_x(-event.relative.y * 0.01)
 
 func _process(delta):
 	if !InspectionManager.inspecting:
@@ -69,5 +98,5 @@ func _process(delta):
 
 	# Auto rotate ONLY when not manually rotating
 	if !manual_active:
-		item_holder.rotation.y += delta * 0.5
-		item_holder.rotation.x = sin(Time.get_ticks_msec() * 0.001) * 0.2
+		pivot.rotation.y += delta * 0.5
+		pivot.rotation.x = sin(Time.get_ticks_msec() * 0.001) * 0.2
