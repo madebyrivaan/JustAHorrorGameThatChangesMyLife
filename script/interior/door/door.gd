@@ -30,6 +30,7 @@ enum UnlockType { KEY, PHOTO, NONE }
 @export var min_pitch : float = 0.6 
 ## Maximum pitch (fast movement)
 @export var max_pitch : float = 1.2 
+@onready var forse_close: AudioStreamPlayer3D = $"../Door8/ForseClose"
 
 # --- AUTOCLOSE VARIABLES ---
 @export_group("Auto Close")
@@ -197,4 +198,11 @@ func on_photo_taken():
 
 func force_open_fast():
 	door_lock = false
-	target_angle = clamp(current_angle + 40.0, min_angle, max_angle)
+	audio_player.play()
+	target_angle = clamp(current_angle + 90.0, min_angle, max_angle)
+
+func force_close_fast():
+	await get_tree().create_timer(0.4).timeout
+	target_angle = clamp(current_angle - 85.0, min_angle, max_angle)
+	await get_tree().create_timer(1).timeout
+	forse_close.play()

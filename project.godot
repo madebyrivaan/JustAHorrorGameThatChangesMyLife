@@ -82,6 +82,8 @@ inventory_ui=""
 interior=""
 StartRoom=""
 photo_reactive=""
+concrete=""
+lighting=""
 
 [input]
 

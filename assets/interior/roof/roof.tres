@@ -1,0 +1,22 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://cigcg58ie4dor"]
+
+[ext_resource type="Texture2D" uid="uid://cjcb3d0rlxkyo" path="res://assets/interior/roof/textures/gravel_concrete_diff_2k.jpg" id="1_mr1od"]
+[ext_resource type="Texture2D" uid="uid://wt36ve7nujm2" path="res://assets/interior/roof/textures/gravel_concrete_disp_2k.png" id="2_by04d"]
+[ext_resource type="Texture2D" uid="uid://cg204q3bw7cqp" path="res://assets/interior/roof/textures/gravel_concrete_ao_2k.jpg" id="2_hht1v"]
+[ext_resource type="Texture2D" uid="uid://bpjpyx1o1ii2g" path="res://assets/interior/roof/textures/gravel_concrete_nor_gl_2k.jpg" id="3_hht1v"]
+[ext_resource type="Texture2D" uid="uid://bgduu1kuqt2il" path="res://assets/interior/roof/textures/gravel_concrete_rough_2k.jpg" id="5_ymvvo"]
+
+[resource]
+albedo_color = Color(0.84705883, 0.8235294, 0.78039217, 1)
+albedo_texture = ExtResource("1_mr1od")
+roughness = 0.7
+roughness_texture = ExtResource("5_ymvvo")
+normal_enabled = true
+normal_scale = 2.0
+normal_texture = ExtResource("3_hht1v")
+ao_enabled = true
+ao_texture = ExtResource("2_hht1v")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_by04d")
+uv1_triplanar = true
+uv1_world_triplanar = true

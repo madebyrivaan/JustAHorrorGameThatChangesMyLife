@@ -6,17 +6,18 @@ extends Label3D
 func _ready():
 	if clue_key in GameManager.puzzle_data:
 		var value = GameManager.puzzle_data[clue_key]
+		print(format_text(value))
 		text = format_text(value)
-
+		
 func format_text(value):
 	match clue_key:
 		"birthday":
-			return "She was " + str(value) + " years old."
+			return str(value)
 		"death":
-			return "She died " + str(value) + " years ago."
+			return str(value)
 		"abandon":
-			return "This house was abandoned " + str(value) + " years ago."
+			return str(value) 
 		"case":
-			return "Case file number: " + str(value)
+			return str(value)
 		_:
 			return str(value)

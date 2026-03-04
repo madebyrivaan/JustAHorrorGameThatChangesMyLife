@@ -23,18 +23,18 @@ func trigger_lightning(strong := false):
 	var flashes = randi_range(2, 4)
 
 	for i in range(flashes):
-		light.light_energy = randf_range(0.5, 0.9) if strong else randf_range(0.25, 0.45)
+		light.light_energy = randf_range(1, 2) if strong else randf_range(2, 4)
 
-		await get_tree().create_timer(0.04).timeout
+		await get_tree().create_timer(0.1).timeout
 		light.light_energy = 0.0
-		await get_tree().create_timer(0.06).timeout
+		await get_tree().create_timer(0.2).timeout
 
 
-func trigger_thunder():
-	var delay = randf_range(1.6, 2.8)
+func trigger_thunder(custom_delay := -1.0):
+	var delay = randf_range(1, 2) if custom_delay < 0.0 else custom_delay
 	await get_tree().create_timer(delay).timeout
 
-	thunder_audio.volume_db = randf_range(10.0, 16.0)
+	thunder_audio.volume_db = randf_range(20.0, 29.0)
 	thunder_audio.play()
 
 
@@ -87,3 +87,7 @@ func _ready():
 		else:
 			nothing_count += 1
 			print("🌑 EVENT: NOT")
+			
+func force_thunder(strong := true):
+	await trigger_lightning(strong)
+	await trigger_thunder(0.05)

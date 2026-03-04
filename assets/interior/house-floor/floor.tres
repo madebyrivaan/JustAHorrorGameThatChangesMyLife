@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://bklfsijx0lbyy"]
+
+[ext_resource type="Texture2D" uid="uid://br64v8pqav4mt" path="res://assets/interior/house-floor/floor-darker1_weathered_planks_diff_2k.jpg" id="1_rnvdf"]
+[ext_resource type="Texture2D" uid="uid://cmeyflrjftxb7" path="res://assets/interior/house-floor/weathered_planks_ao_2k.jpg" id="2_pybtf"]
+[ext_resource type="Texture2D" uid="uid://bt7v7ylksromc" path="res://assets/interior/house-floor/weathered_planks_nor_gl_2k.jpg" id="2_rnvdf"]
+[ext_resource type="Texture2D" uid="uid://d2r6k572magrw" path="res://assets/interior/house-floor/weathered_planks_rough_2k.jpg" id="3_qrkcv"]
+
+[resource]
+albedo_texture = ExtResource("1_rnvdf")
+metallic_specular = 0.45
+roughness = 0.6
+roughness_texture = ExtResource("3_qrkcv")
+normal_enabled = true
+normal_texture = ExtResource("2_rnvdf")
+ao_enabled = true
+ao_texture = ExtResource("2_pybtf")
+uv1_scale = Vector3(1.795, 1.795, 1.795)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.1486986

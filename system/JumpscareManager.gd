@@ -4,10 +4,10 @@ var active_sequence : bool = false
 var sequence_cooldown : float = 5.0
 var last_sequence_time : float = -1000.0
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
+
+func _ready() -> void:
+	pass
 func conditions_met(event_name:String) -> bool:
 	# For prototype always allow
 	return true
@@ -39,11 +39,10 @@ func run_sequence(event_name:String, source):
 
 
 func play_door_shadow_sequence(source):
-	print("🔥 Running DOOR_PHOTO_HALLWAY sequence")
-
-	# Force open
 	source.force_open_fast()
+	source.force_close_fast()
+	var scene = get_tree().current_scene
+	var black_shadow = scene.get_node("coridoor/gameplay/GhostStart/black_shadow")
 
-	await get_tree().create_timer(0.5).timeout
-
-	print("👻 Shadow ran in hallway")
+	black_shadow.visible = true
+	black_shadow.start_run()
