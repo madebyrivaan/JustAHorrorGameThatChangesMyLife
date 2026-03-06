@@ -5,13 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://dyjxsl6k5j4i0" path="res://assets/interior/wall/textures-rough/rough_concrete_disp_2k.png" id="3_fpkho"]
 [ext_resource type="Texture2D" uid="uid://vjfbi42m2v0k" path="res://assets/interior/wall/textures-rough/rough_concrete_rough_2k.jpg" id="4_sf26y"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_my1yf"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dpksu"]
 load_path = "res://.godot/imported/rough_concrete_diff_2k.jpg-240dc2877c6bb500197df47bd81f1f22.s3tc.ctex"
 
 [resource]
 albedo_color = Color(0.7070091, 0.7593912, 0.70343184, 1)
-albedo_texture = SubResource("CompressedTexture2D_my1yf")
-metallic_specular = 0.6
+albedo_texture = SubResource("CompressedTexture2D_dpksu")
 roughness = 0.6
 roughness_texture = ExtResource("4_sf26y")
 normal_enabled = true

@@ -1,8 +1,9 @@
 extends CanvasLayer
 
-@onready var name_label = $Control/Label
-@onready var description_label = $Control/RichTextLabel
+
+@onready var name_label: Label = $Control/name
 @onready var preview_holder: Node3D = $Control/SubViewportContainer/SubViewport/InspectionWorld/PreviewHolder
+@onready var description_label: Label = $Control/description
 
 func _ready():
 	visible = false
@@ -68,8 +69,12 @@ func _on_selection_changed(data: Dictionary):
 		return
 		
 	name_label.text = data["id"]
-	description_label.text = data["description"]
 	
+	description_label.text = data["description"]
+	description_label.visible_ratio = 0
+
+	var t = create_tween()
+	t.tween_property(description_label, "visible_ratio", 1.0, 0.5)
 	_spawn_preview(data["preview_scene"])
 
 
@@ -83,13 +88,17 @@ func _spawn_preview(scene: PackedScene):
 
 	var preview = scene.instantiate()
 	preview_holder.add_child(preview)
+	preview.scale = Vector3.ZERO
+
+	var tween = create_tween()
+	tween.tween_property(preview, "scale", Vector3.ONE * 0.7, 0.25)\
+	 .set_trans(Tween.TRANS_BACK)\
+	 .set_ease(Tween.EASE_OUT)
 	print("Preview instance:", preview)
 
 	# 🔥 RESET EVERYTHING
 	preview.transform = Transform3D.IDENTITY
 	preview.rotation = Vector3.ZERO   # ⭐ MOST IMPORTANT
 
-	# Optional scale
-	preview.scale = Vector3.ONE * 0.15
 	# Reset transform for clean cinematic look
 	preview.transform = Transform3D.IDENTITY

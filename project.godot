@@ -152,6 +152,7 @@ camera_click={
 textures/canvas_textures/default_texture_filter=0
 lights_and_shadows/directional_shadow/size=2096
 lights_and_shadows/directional_shadow/size.mobile=1048
+textures/default_filters/anisotropic_filtering_level=3
 occlusion_culling/use_occlusion_culling=true
 mesh_lod/lod_change/threshold_pixels=6.0
 

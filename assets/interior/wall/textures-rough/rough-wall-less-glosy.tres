@@ -1,0 +1,25 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://btjcctu0xff48"]
+
+[ext_resource type="Texture2D" uid="uid://cqx8b5s5crnp0" path="res://assets/interior/wall/textures-rough/rough_concrete_ao_2k.jpg" id="1_f0yhn"]
+[ext_resource type="Texture2D" uid="uid://dyjxsl6k5j4i0" path="res://assets/interior/wall/textures-rough/rough_concrete_disp_2k.png" id="2_36rfo"]
+[ext_resource type="Texture2D" uid="uid://b4j25po0dbvmk" path="res://assets/interior/wall/textures-rough/rough_concrete_nor_gl_2k.jpg" id="3_my4mx"]
+[ext_resource type="Texture2D" uid="uid://vjfbi42m2v0k" path="res://assets/interior/wall/textures-rough/rough_concrete_rough_2k.jpg" id="4_jlwwa"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_my1yf"]
+load_path = "res://.godot/imported/rough_concrete_diff_2k.jpg-240dc2877c6bb500197df47bd81f1f22.s3tc.ctex"
+
+[resource]
+albedo_color = Color(0.7070091, 0.7593912, 0.70343184, 1)
+albedo_texture = SubResource("CompressedTexture2D_my1yf")
+metallic_specular = 0.3
+roughness = 0.8
+roughness_texture = ExtResource("4_jlwwa")
+normal_enabled = true
+normal_texture = ExtResource("3_my4mx")
+ao_enabled = true
+ao_texture = ExtResource("1_f0yhn")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_36rfo")
+uv1_triplanar = true
+uv1_world_triplanar = true
+grow_amount = 3.148
