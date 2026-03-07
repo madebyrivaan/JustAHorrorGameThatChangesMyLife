@@ -22,7 +22,8 @@ var room_node: Node = null
 enum UnlockType { KEY, PHOTO, NONE }
 @export var unlock_type := UnlockType.KEY
 @export var sequence_event_name : String = "DOOR_PHOTO_HALLWAY"
-
+@export var auto_close_enabled := true
+var destroyed := false
 
 @export_group("Audio")
 @onready var audio_player: AudioStreamPlayer3D = $SFX_Open
@@ -37,7 +38,8 @@ enum UnlockType { KEY, PHOTO, NONE }
 @export var slow_close_force := 5.0
 @export var fast_close_force := 25.0
 @export var fast_close_delay := 3.0
-
+@export var animation: NodePath
+var anim : Node
 var release_time := 0.0
 
 
@@ -57,7 +59,7 @@ func _ready() -> void:
 		room_node = get_node(holder_room)
 	current_angle = hinge.rotation_degrees.y
 	target_angle = current_angle
-	
+
 	# 🔑 INITIAL DOOR STATE SYNC
 	is_door_open = current_angle > open_angle
 
@@ -94,6 +96,8 @@ func handle_drag(mouse_delta : Vector2):
 func _physics_process(delta: float) -> void:
 	if door_lock:
 		return;
+	if destroyed:
+		return
 	# 1. PHYSICS INTERPOLATION (The AAA Feel)
 	# Instead of setting rotation directly, we move "current" towards "target"
 	# This creates that slight delay/weight feel.
@@ -133,7 +137,7 @@ func _physics_process(delta: float) -> void:
 			room_node.evaluate_state()
 
 
-	if !is_being_dragged:
+	if !is_being_dragged and auto_close_enabled and current_angle > close_angle:
 		var now := Time.get_ticks_msec() / 1000.0
 		var elapsed := now - release_time
 		var force := slow_close_force
@@ -204,5 +208,16 @@ func force_open_fast():
 func force_close_fast():
 	await get_tree().create_timer(0.4).timeout
 	target_angle = clamp(current_angle - 85.0, min_angle, max_angle)
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.4).timeout
 	forse_close.play()
+
+func Auto_close_disabled(time:int):
+	auto_close_enabled = false;
+	await get_tree().create_timer(time).timeout
+	auto_close_enabled = true;
+
+func break_door():
+	destroyed = true
+	auto_close_enabled = false
+	is_being_dragged = false
+	target_angle = current_angle

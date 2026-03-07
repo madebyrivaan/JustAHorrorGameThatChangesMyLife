@@ -56,6 +56,15 @@ DoorManager="*res://system/door_stream_manager.gd"
 GameManager="*res://script/system-logic/GameManager.gd"
 JumpscareManager="*res://system/JumpscareManager.gd"
 
+[display]
+
+window/size/mode=4
+window/size/borderless=true
+
+[editor]
+
+movie_writer/movie_file="D:/download/hry.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/simplegrasstextured/plugin.cfg")

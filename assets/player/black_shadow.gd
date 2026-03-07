@@ -1,37 +1,47 @@
 extends Node3D
 
-@export var life_time : float = 2.0
-@onready var anim: AnimationPlayer = $human/AnimationPlayer
 @onready var player = get_tree().get_nodes_in_group("player")[0]
 @onready var lighting = get_tree().get_nodes_in_group("lighting")[0]
 
 
-func start_run():
-	visible = true
+func start_run(source):
+	source.force_open_fast()
+	source.Auto_close_disabled(15)
 	
-	# 0.00s
-	player.freeze_player(0.4)
+	player.freeze_player(1.2)
 
-	await get_tree().create_timer(0.05).timeout
-	player.add_fov_punch(3, 1)
-
-	await get_tree().create_timer(0.05).timeout
-	player.add_shake(5.0 , 2.0)
-
-	await get_tree().create_timer(0.05).timeout
-	anim.play("mixamo_com")
-
-	await get_tree().create_timer(0.08).timeout
-	player.playJumscare1()
-
+	# ---------- STEP 1 (far) ----------
+	visible = true
 	await get_tree().create_timer(0.12).timeout
 	lighting.force_thunder(true)
-	
+	visible = false
+
+	await get_tree().create_timer(0.25).timeout
+	player.playJumscare1()
+
+	# ---------- STEP 2 ----------
+	position.z = 1
+	rotation_degrees.z = 5
+	player.add_shake(1.5,0.3)
+	visible = true
 	await get_tree().create_timer(0.12).timeout
+	visible = false
+
+	await get_tree().create_timer(0.22).timeout
+
+
+	# ---------- STEP 3 ----------
+	position.z += 1.0
+
+	rotation_degrees.z = -5
+
+	visible = true
+	player.add_shake(1.5,0.3)
+	await get_tree().create_timer(0.10).timeout
+	source.break_door()
+	visible = false
+	
+
 	player.AdjustRainSound()
 	player.AfterVoiceEffect()
-	await get_tree().create_timer(0.05).timeout
 	player.trigger_peripheral_collapse()
-	await get_tree().create_timer(life_time).timeout
-	visible = false
-	player.add_shake(0.2, 1)

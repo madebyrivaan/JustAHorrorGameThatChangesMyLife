@@ -39,10 +39,6 @@ func run_sequence(event_name:String, source):
 
 
 func play_door_shadow_sequence(source):
-	source.force_open_fast()
-	source.force_close_fast()
 	var scene = get_tree().current_scene
-	var black_shadow = scene.get_node("coridoor/gameplay/GhostStart/black_shadow")
-
-	black_shadow.visible = true
-	black_shadow.start_run()
+	var black_shadow = scene.get_node("coridoor/gameplay/GhostStart/Zombie-final")
+	black_shadow.start_run(source)

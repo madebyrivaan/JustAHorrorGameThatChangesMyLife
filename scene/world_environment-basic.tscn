@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dypyc3mgserl"]
+
+[sub_resource type="Environment" id="Environment_dih2o"]
+background_mode = 2
+volumetric_fog_enabled = true
+volumetric_fog_temporal_reprojection_amount = 0.99
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_dih2o")
